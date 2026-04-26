@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pinmatic Demo — Pinterest Pin Creator for Food Bloggers</title>
+<meta name="robots" content="noindex, nofollow">
+<title>Pinmatic Demo — WordPress Admin Preview</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
 <style>
+
 /* ================================================================
    RESET & BASE
    ================================================================ */
@@ -703,11 +705,363 @@ button { cursor: pointer; font-family: inherit; }
   .landing { padding: 20px 16px; }
   .landing-hero-body { padding: 20px; }
 }
+
+
+/* ================================================================
+   WORDPRESS ADMIN SHELL
+   ================================================================ */
+   
+/* WP Admin Bar */
+#wpadminbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 32px; background: #1d2327; z-index: 9999;
+  display: flex; align-items: center; padding: 0 12px;
+  font-size: 13px; color: #c3c4c7;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+}
+#wpadminbar .wp-logo {
+  display: flex; align-items: center; gap: 8px;
+  margin-right: 16px;
+}
+#wpadminbar .wp-logo svg { opacity: 0.7; }
+#wpadminbar .ab-item {
+  padding: 0 8px; color: #c3c4c7; text-decoration: none;
+  font-size: 13px; line-height: 32px;
+}
+#wpadminbar .ab-item:hover { color: #72aee6; }
+#wpadminbar .ab-right { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+#wpadminbar .ab-right .avatar {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: #8c8f94; display: inline-block;
+}
+
+/* WP Sidebar */
+#adminmenuwrap {
+  position: fixed; top: 32px; left: 0; bottom: 0;
+  width: 160px; background: #1d2327; overflow-y: auto;
+  z-index: 9998;
+}
+#adminmenu {
+  list-style: none; padding: 0; margin: 0;
+}
+#adminmenu li { border-bottom: none; }
+#adminmenu li a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; color: #c3c4c7; text-decoration: none;
+  font-size: 13px; line-height: 1.4;
+  transition: background 0.1s, color 0.1s;
+}
+#adminmenu li a:hover { background: #2c3338; color: #72aee6; }
+#adminmenu li a .dashicon {
+  width: 20px; height: 20px; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 16px; opacity: 0.7; flex-shrink: 0;
+}
+#adminmenu li a:hover .dashicon { opacity: 1; }
+#adminmenu li.wp-menu-separator {
+  height: 1px; background: #2c3338; margin: 4px 0;
+}
+#adminmenu li.current > a {
+  background: #2271b1; color: #fff;
+}
+#adminmenu li.current > a .dashicon { opacity: 1; }
+#adminmenu li.pinmatic-menu > a {
+  position: relative;
+}
+#adminmenu li.pinmatic-menu .dashicon {
+  color: #e8a87c;
+}
+#adminmenu li.pinmatic-menu.current .dashicon {
+  color: #fff;
+}
+
+/* WP Main Content Area */
+#wpcontent {
+  margin-left: 160px; margin-top: 32px;
+  min-height: calc(100vh - 32px);
+  background: #f0f0f1;
+}
+.wp-content-inner {
+  padding: 20px;
+}
+
+/* WP Page Header */
+.wp-heading-inline {
+  font-size: 23px; font-weight: 400; color: #1d2327;
+  line-height: 1.3; margin: 0;
+}
+.wp-header-row {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 20px;
+}
+.page-title-action {
+  display: inline-block; padding: 4px 8px;
+  font-size: 13px; color: #2271b1; border: 1px solid #2271b1;
+  border-radius: 3px; text-decoration: none;
+  background: transparent;
+}
+.page-title-action:hover { background: #2271b1; color: #fff; }
+
+/* WP Posts Table */
+.wp-list-table {
+  width: 100%; background: #fff;
+  border: 1px solid #c3c4c7; border-spacing: 0;
+  border-radius: 0;
+  font-size: 13px;
+}
+.wp-list-table th {
+  text-align: left; padding: 8px 10px;
+  border-bottom: 1px solid #c3c4c7;
+  font-weight: 400; color: #2271b1;
+  background: #f6f7f7;
+}
+.wp-list-table td {
+  padding: 8px 10px; border-bottom: 1px solid #f0f0f1;
+  vertical-align: top;
+}
+.wp-list-table tr:hover td { background: #f6f7f7; }
+.wp-list-table .post-title {
+  font-weight: 600; color: #2271b1; font-size: 14px;
+}
+.wp-list-table .row-actions {
+  color: #787c82; font-size: 12px; margin-top: 2px;
+  visibility: hidden;
+}
+.wp-list-table tr:hover .row-actions { visibility: visible; }
+.wp-list-table .row-actions a {
+  color: #2271b1; text-decoration: none;
+}
+.wp-list-table .row-actions a:hover { color: #135e96; }
+.wp-list-table .row-actions .create-pins {
+  color: #d63638; font-weight: 600;
+}
+.wp-list-table .row-actions .create-pins:hover { color: #b32d2e; }
+.wp-list-table .post-status { 
+  color: #787c82; font-weight: 400; 
+}
+.wp-list-table .column-date { color: #50575e; }
+
+/* WP Notice */
+.wp-notice {
+  background: #fff; border-left: 4px solid #00a32a;
+  padding: 8px 12px; margin-bottom: 20px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+  font-size: 13px;
+}
+.wp-notice.notice-info { border-left-color: #72aee6; }
+
+/* Subheading with filter tabs */
+.subsubsub {
+  display: flex; gap: 8px; list-style: none; 
+  margin-bottom: 12px; font-size: 13px; color: #50575e;
+}
+.subsubsub a { color: #2271b1; text-decoration: none; }
+.subsubsub .current { font-weight: 600; color: #1d2327; }
+.subsubsub .count { color: #787c82; }
+
+/* WP Screen transitions */
+.wp-screen { display: none; }
+.wp-screen.active { display: block; }
+
+/* Override prototype styles when inside WP shell */
+#wp-pinmatic-screen .landing {
+  max-width: 100%; padding: 0;
+}
+#wp-pinmatic-screen .landing-header { display: none; }
+#wp-pinmatic-screen .landing-hero { margin-bottom: 20px; }
+
 </style>
 </head>
 <body>
 
 <!-- ============================================================
+     WORDPRESS ADMIN BAR
+     ============================================================ -->
+<div id="wpadminbar">
+  <div class="wp-logo">
+    <svg width="20" height="20" viewBox="0 0 122.52 122.52" fill="#c3c4c7"><path d="M8.708 61.26c0 20.802 12.089 38.779 29.619 47.298L13.258 39.872a52.354 52.354 0 00-4.55 21.388zm88.032-2.652c0-6.495-2.333-10.993-4.334-14.494-2.664-4.329-5.161-7.995-5.161-12.324 0-4.831 3.664-9.328 8.825-9.328.233 0 .454.029.681.042-9.35-8.566-21.807-13.796-35.489-13.796-18.36 0-34.513 9.42-43.91 23.688 1.233.037 2.395.063 3.382.063 5.497 0 14.006-.668 14.006-.668 2.833-.167 3.167 3.994.337 4.329 0 0-2.847.335-6.015.501L48.2 93.547l11.501-34.493-8.188-22.434c-2.83-.166-5.511-.501-5.511-.501-2.832-.166-2.5-4.496.332-4.329 0 0 8.679.668 13.843.668 5.496 0 14.006-.668 14.006-.668 2.834-.167 3.168 3.994.337 4.329 0 0-2.853.335-6.015.501l18.992 56.494 5.242-17.517c2.272-7.269 4.001-12.49 4.001-16.989z"/><path d="M62.184 65.857l-15.768 45.819a52.516 52.516 0 0032.644-.849 4.7 4.7 0 01-.377-.726L62.184 65.857zm45.125-29.836a48.66 48.66 0 01.382 6.851c0 6.764-1.264 14.369-5.093 23.869l-20.467 59.175C98.04 97.377 108.67 80.593 108.67 61.26c0-9.073-2.447-17.583-6.706-24.898l5.345-.341z"/><path d="M61.26 0C27.434 0 0 27.434 0 61.26s27.434 61.26 61.26 61.26 61.26-27.434 61.26-61.26S95.086 0 61.26 0zm0 119.715c-32.242 0-58.455-26.213-58.455-58.455S29.018 2.805 61.26 2.805s58.455 26.213 58.455 58.455-26.213 58.455-58.455 58.455z"/></svg>
+  </div>
+  <a class="ab-item" href="#">Frugal Feast Recipes</a>
+  <div class="ab-right">
+    <a class="ab-item" href="#">Howdy, Daniel</a>
+    <span class="avatar"></span>
+  </div>
+</div>
+
+<!-- ============================================================
+     WORDPRESS ADMIN SIDEBAR
+     ============================================================ -->
+<div id="adminmenuwrap">
+  <ul id="adminmenu">
+    <li><a href="#" onclick="showWpScreen('dashboard'); return false;"><span class="dashicon">&#x1F3E0;</span> Dashboard</a></li>
+    <li class="wp-menu-separator"></li>
+    <li id="menu-posts" class="current"><a href="#" onclick="showWpScreen('posts'); return false;"><span class="dashicon">&#x1F4CC;</span> Posts</a></li>
+    <li><a href="#"><span class="dashicon">&#x1F4C4;</span> Pages</a></li>
+    <li><a href="#"><span class="dashicon">&#x1F4AC;</span> Comments</a></li>
+    <li class="wp-menu-separator"></li>
+    <li><a href="#"><span class="dashicon">&#x1F3A8;</span> Appearance</a></li>
+    <li><a href="#"><span class="dashicon">&#x1F50C;</span> Plugins</a></li>
+    <li><a href="#"><span class="dashicon">&#x1F465;</span> Users</a></li>
+    <li><a href="#"><span class="dashicon">&#x1F527;</span> Tools</a></li>
+    <li><a href="#"><span class="dashicon">&#x2699;&#xFE0F;</span> Settings</a></li>
+    <li class="wp-menu-separator"></li>
+    <li id="menu-pinmatic" class="pinmatic-menu"><a href="#" onclick="showWpScreen('pinmatic'); return false;"><span class="dashicon">&#x1F4CD;</span> Pinmatic</a></li>
+  </ul>
+</div>
+
+<!-- ============================================================
+     MAIN CONTENT AREA
+     ============================================================ -->
+<div id="wpcontent">
+  <div class="wp-content-inner">
+
+    <!-- ── WP SCREEN: POSTS LIST ── -->
+    <div id="wp-posts-screen" class="wp-screen active">
+      <div class="wp-header-row">
+        <h1 class="wp-heading-inline">Posts</h1>
+        <a href="#" class="page-title-action">Add New Post</a>
+      </div>
+
+      <div class="wp-notice notice-info">
+        <strong>Pinmatic is active!</strong> Hover over any published post and click <strong>"Create Pins"</strong> to generate Pinterest pins automatically.
+      </div>
+
+      <ul class="subsubsub">
+        <li><a href="#" class="current">All <span class="count">(24)</span></a> |</li>
+        <li><a href="#">Published <span class="count">(22)</span></a> |</li>
+        <li><a href="#">Drafts <span class="count">(2)</span></a></li>
+      </ul>
+
+      <table class="wp-list-table">
+        <thead>
+          <tr>
+            <th style="width:4%"><input type="checkbox"></th>
+            <th style="width:42%">Title</th>
+            <th style="width:16%">Author</th>
+            <th style="width:16%">Categories</th>
+            <th style="width:12%">Tags</th>
+            <th style="width:10%">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <span class="post-title">Quick Vietnamese Baguettes (Banh Mi Style)</span>
+              <span class="post-status"> &mdash; Published</span>
+              <div class="row-actions">
+                <a href="#">Edit</a> | 
+                <a href="#">Quick Edit</a> | 
+                <a href="#">Trash</a> | 
+                <a href="#">View</a> | 
+                <a href="#" class="create-pins" onclick="launchPinmatic(); return false;">Create Pins</a>
+              </div>
+            </td>
+            <td>Daniel</td>
+            <td>Bread &amp; Baking</td>
+            <td>Vietnamese, Quick</td>
+            <td class="column-date">April 18, 2026</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <span class="post-title">15-Minute Garlic Butter Shrimp</span>
+              <span class="post-status"> &mdash; Published</span>
+              <div class="row-actions">
+                <a href="#">Edit</a> | 
+                <a href="#">Quick Edit</a> | 
+                <a href="#">Trash</a> | 
+                <a href="#">View</a> | 
+                <a href="#" class="create-pins">Create Pins</a>
+              </div>
+            </td>
+            <td>Daniel</td>
+            <td>Seafood</td>
+            <td>Quick, Budget</td>
+            <td class="column-date">April 12, 2026</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <span class="post-title">One-Pot Chicken Adobo</span>
+              <span class="post-status"> &mdash; Published</span>
+              <div class="row-actions">
+                <a href="#">Edit</a> | 
+                <a href="#">Quick Edit</a> | 
+                <a href="#">Trash</a> | 
+                <a href="#">View</a> | 
+                <a href="#" class="create-pins">Create Pins</a>
+              </div>
+            </td>
+            <td>Daniel</td>
+            <td>Filipino</td>
+            <td>One-pot, Chicken</td>
+            <td class="column-date">April 5, 2026</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <span class="post-title">Crispy Tofu Buddha Bowl</span>
+              <span class="post-status"> &mdash; Published</span>
+              <div class="row-actions">
+                <a href="#">Edit</a> | 
+                <a href="#">Quick Edit</a> | 
+                <a href="#">Trash</a> | 
+                <a href="#">View</a> | 
+                <a href="#" class="create-pins">Create Pins</a>
+              </div>
+            </td>
+            <td>Daniel</td>
+            <td>Vegetarian</td>
+            <td>Meal Prep, Healthy</td>
+            <td class="column-date">March 28, 2026</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <span class="post-title">$5 Sheet Pan Fajitas</span>
+              <span class="post-status"> &mdash; Published</span>
+              <div class="row-actions">
+                <a href="#">Edit</a> | 
+                <a href="#">Quick Edit</a> | 
+                <a href="#">Trash</a> | 
+                <a href="#">View</a> | 
+                <a href="#" class="create-pins">Create Pins</a>
+              </div>
+            </td>
+            <td>Daniel</td>
+            <td>Mexican</td>
+            <td>Budget, Family</td>
+            <td class="column-date">March 20, 2026</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox"></td>
+            <td>
+              <span class="post-title">Slow Cooker Lentil Soup</span>
+              <span class="post-status"> &mdash; Draft</span>
+              <div class="row-actions">
+                <a href="#">Edit</a> | 
+                <a href="#">Quick Edit</a> | 
+                <a href="#">Trash</a> | 
+                <a href="#">Preview</a>
+              </div>
+            </td>
+            <td>Daniel</td>
+            <td>Soups</td>
+            <td>Slow Cooker, Vegan</td>
+            <td class="column-date">March 15, 2026</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── WP SCREEN: PINMATIC ── -->
+    <div id="wp-pinmatic-screen" class="wp-screen">
+      <div class="wp-header-row">
+        <h1 class="wp-heading-inline">Pinmatic</h1>
+      </div>
+      
+      <!-- ============================================================
      SCREEN 0: LANDING CONTEXT
      ============================================================ -->
 <div id="screen-landing" class="screen active">
@@ -974,7 +1328,24 @@ button { cursor: pointer; font-family: inherit; }
 
   </div>
 </div>
+    </div>
 
+    <!-- ── WP SCREEN: DASHBOARD (placeholder) ── -->
+    <div id="wp-dashboard-screen" class="wp-screen">
+      <div class="wp-header-row">
+        <h1 class="wp-heading-inline">Dashboard</h1>
+      </div>
+      <div class="wp-notice">
+        Welcome to WordPress! This is a demo environment. Click <strong>Posts</strong> in the sidebar to see your blog posts, then use <strong>Create Pins</strong> to try Pinmatic.
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
 <script>
 /* ================================================================
@@ -1334,6 +1705,40 @@ function submitFeedback() {
   // For now, just show the thank-you message
   document.getElementById('feedback-form').style.display = 'none';
   document.getElementById('feedback-thanks').style.display = 'block';
+}
+</script>
+
+<script>
+/* ================================================================
+   WP ADMIN SHELL CONTROLS
+   ================================================================ */
+function showWpScreen(screen) {
+  // Hide all WP screens
+  document.querySelectorAll('.wp-screen').forEach(function(s) { s.classList.remove('active'); });
+  
+  // Remove current from all menu items
+  document.querySelectorAll('#adminmenu li').forEach(function(li) { li.classList.remove('current'); });
+  
+  if (screen === 'posts') {
+    document.getElementById('wp-posts-screen').classList.add('active');
+    document.getElementById('menu-posts').classList.add('current');
+  } else if (screen === 'pinmatic') {
+    document.getElementById('wp-pinmatic-screen').classList.add('active');
+    document.getElementById('menu-pinmatic').classList.add('current');
+    // Show the landing screen of the prototype
+    document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+    document.getElementById('screen-landing').classList.add('active');
+  } else if (screen === 'dashboard') {
+    document.getElementById('wp-dashboard-screen').classList.add('active');
+  }
+}
+
+function launchPinmatic() {
+  showWpScreen('pinmatic');
+  // Auto-open the wizard since they clicked from a specific post
+  setTimeout(function() {
+    openWizard();
+  }, 400);
 }
 </script>
 
