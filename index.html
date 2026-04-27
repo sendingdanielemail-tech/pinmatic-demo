@@ -272,18 +272,28 @@ button { cursor: pointer; font-family: inherit; }
   height: 24px;
   border-radius: 50%;
   border: 2px solid rgba(255,255,255,0.8);
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: transparent;
-  font-size: 14px;
   transition: all 0.15s;
+}
+.tpl-card-check::after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 11px;
+  border: solid transparent;
+  border-width: 0 2.5px 2.5px 0;
+  transform: rotate(45deg);
+  margin-top: -2px;
 }
 .tpl-card.selected .tpl-card-check {
   background: #2271b1;
   border-color: #fff;
-  color: #fff;
+}
+.tpl-card.selected .tpl-card-check::after {
+  border-color: #fff;
 }
 .tpl-card-info { padding: 10px 12px; }
 .tpl-card-info strong { display: block; font-size: 13px; margin-bottom: 2px; }
@@ -347,7 +357,7 @@ button { cursor: pointer; font-family: inherit; }
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-/* Fake rendered pin image — zoomed to crop out baked-in sample text */
+/* Pin preview — zoomed to show food photo, template-styled overlay */
 .pin-preview-placeholder {
   width: 240px;
   height: 360px;
@@ -359,34 +369,100 @@ button { cursor: pointer; font-family: inherit; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 16px;
   position: relative;
-}
-.pin-preview-placeholder::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 65%);
-  z-index: 1;
 }
 .pin-preview-placeholder .pin-overlay-text {
   position: relative;
   z-index: 2;
-  color: #fff;
+  padding: 14px 16px 16px;
 }
 .pin-preview-placeholder .pin-overlay-text h3 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.3;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 .pin-preview-placeholder .pin-overlay-text .pin-subtitle {
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  opacity: 0.85;
+  opacity: 0.8;
   font-weight: 600;
 }
+/* ---- Per-template overlay styles ---- */
+/* Classic Dark: dark gradient overlay, white text */
+.pin-tpl-classic_dark .pin-overlay-text {
+  background: linear-gradient(to top, rgba(30,20,15,0.92) 0%, rgba(30,20,15,0.7) 70%, transparent 100%);
+  color: #fff; padding-top: 30px;
+}
+/* Bold Banner: solid red banner, ALL CAPS white text */
+.pin-tpl-bold_banner .pin-overlay-text {
+  background: #c0392b; color: #fff;
+}
+.pin-tpl-bold_banner .pin-overlay-text h3 {
+  text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px;
+}
+/* Minimal Light: white block, dark text, subtle top border */
+.pin-tpl-minimal_light .pin-overlay-text {
+  background: rgba(255,255,255,0.94); color: #333;
+  border-top: 2px solid #ddd;
+}
+.pin-tpl-minimal_light .pin-overlay-text .pin-subtitle { color: #888; }
+/* Earthy Kitchen: sage green block, white text, thin line */
+.pin-tpl-earthy_kitchen .pin-overlay-text {
+  background: #5a6b4a; color: #fff;
+  border-top: 2px solid rgba(255,255,255,0.25);
+}
+/* Elegant Frame: semi-transparent dark band, white text */
+.pin-tpl-elegant_frame .pin-overlay-text {
+  background: rgba(55,55,55,0.85); color: #fff;
+  border-top: 1px solid rgba(200,180,140,0.4);
+  border-bottom: 1px solid rgba(200,180,140,0.4);
+}
+/* Sunset Glow: warm gradient overlay, white text */
+.pin-tpl-sunset_glow .pin-overlay-text {
+  background: linear-gradient(to top, rgba(140,40,50,0.85) 0%, rgba(180,80,60,0.6) 70%, transparent 100%);
+  color: #fff; padding-top: 30px;
+}
+/* Magazine Cover: dark overlay, serif-like italic feel */
+.pin-tpl-magazine_cover .pin-overlay-text {
+  background: linear-gradient(to top, rgba(10,10,20,0.8) 0%, rgba(10,10,20,0.5) 70%, transparent 100%);
+  color: #fff; padding-top: 30px;
+}
+.pin-tpl-magazine_cover .pin-overlay-text h3 { font-style: italic; }
+/* Neon Pop: dark navy block, uppercase, pink accent line */
+.pin-tpl-neon_pop .pin-overlay-text {
+  background: #1a1a2e; color: #fff;
+  border-top: 3px solid #e84b7a;
+}
+.pin-tpl-neon_pop .pin-overlay-text h3 {
+  text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px;
+}
+/* Torn Paper: cream/white strip, dark text */
+.pin-tpl-torn_paper .pin-overlay-text {
+  background: rgba(255,250,240,0.92); color: #3a3a3a;
+}
+.pin-tpl-torn_paper .pin-overlay-text h3 { font-style: italic; font-weight: 400; }
+.pin-tpl-torn_paper .pin-overlay-text .pin-subtitle { color: #888; }
+/* Split Diagonal: dark navy block, uppercase */
+.pin-tpl-split_diagonal .pin-overlay-text {
+  background: #1a2744; color: #fff;
+  border-top: 3px solid #e84b7a;
+}
+.pin-tpl-split_diagonal .pin-overlay-text h3 {
+  text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px;
+}
+/* Soft Blush: pink overlay, white text */
+.pin-tpl-soft_blush .pin-overlay-text {
+  background: linear-gradient(to top, rgba(220,170,170,0.8) 0%, rgba(230,190,190,0.5) 70%, transparent 100%);
+  color: #fff; padding-top: 30px;
+}
+/* Recipe Card: white card area, dark text, red line */
+.pin-tpl-recipe_card .pin-overlay-text {
+  background: rgba(255,248,240,0.95); color: #333;
+  border-top: 2px solid #d63638;
+}
+.pin-tpl-recipe_card .pin-overlay-text .pin-subtitle { color: #888; }
 .pin-fields { flex: 1; min-width: 0; }
 .pin-fields h3 { font-size: 15px; font-weight: 600; margin: 0 0 12px; }
 .pin-fields label { display: block; margin-bottom: 12px; }
@@ -435,43 +511,61 @@ button { cursor: pointer; font-family: inherit; }
   border: 1px solid #e0e0e0;
   border-radius: 6px;
 }
-/* Flatpickr overrides: center month + make overflow dates selectable */
-.flatpickr-calendar .flatpickr-months {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Flatpickr overrides: center month + selectable overflow dates */
+.schedule-picker .flatpickr-months {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 4px 0 !important;
 }
-.flatpickr-calendar .flatpickr-current-month {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  left: 0;
-  position: relative;
-  padding: 0;
+.schedule-picker .flatpickr-month {
+  flex: 1 !important;
+  display: flex !important;
+  justify-content: center !important;
+  height: auto !important;
+  overflow: visible !important;
 }
-.flatpickr-calendar .flatpickr-month {
-  flex: 1;
-  text-align: center;
+.schedule-picker .flatpickr-current-month {
+  position: relative !important;
+  left: auto !important;
+  width: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
 }
-.flatpickr-calendar .flatpickr-prev-month,
-.flatpickr-calendar .flatpickr-next-month {
-  position: relative;
-  top: auto;
+.schedule-picker .flatpickr-current-month .cur-month {
+  font-weight: 600 !important;
 }
-/* Make next-month overflow dates look fully selectable */
-.flatpickr-calendar .flatpickr-day.nextMonthDay,
-.flatpickr-calendar .flatpickr-day.prevMonthDay {
+.schedule-picker .flatpickr-current-month input.cur-year,
+.schedule-picker .flatpickr-current-month .numInputWrapper {
+  width: auto !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.schedule-picker .flatpickr-prev-month,
+.schedule-picker .flatpickr-next-month {
+  position: relative !important;
+  top: auto !important;
+  padding: 4px 8px !important;
+}
+/* Make next-month overflow dates fully selectable */
+.schedule-picker .flatpickr-day.nextMonthDay,
+.schedule-picker .flatpickr-day.prevMonthDay {
   color: #1d2327 !important;
   opacity: 1 !important;
 }
-.flatpickr-calendar .flatpickr-day.nextMonthDay:hover,
-.flatpickr-calendar .flatpickr-day.prevMonthDay:hover {
-  background: #e6e6e6;
-  border-color: #e6e6e6;
+.schedule-picker .flatpickr-day.nextMonthDay:hover,
+.schedule-picker .flatpickr-day.prevMonthDay:hover {
+  background: #e6e6e6 !important;
+  border-color: #e6e6e6 !important;
 }
-.flatpickr-calendar .flatpickr-day.nextMonthDay.selected,
-.flatpickr-calendar .flatpickr-day.prevMonthDay.selected {
+.schedule-picker .flatpickr-day.nextMonthDay.selected,
+.schedule-picker .flatpickr-day.prevMonthDay.selected {
   background: #d63638 !important;
   border-color: #d63638 !important;
   color: #fff !important;
@@ -1949,7 +2043,7 @@ function buildStep2() {
 
     var html = '<div class="pin-card">';
     html += '<div class="pin-preview">';
-    html += '<div class="pin-preview-placeholder" style="background-image:url(' + imgSrc + ');">';
+    html += '<div class="pin-preview-placeholder pin-tpl-' + slug + '" style="background-image:url(' + imgSrc + ');">';
     html += '<div class="pin-overlay-text">';
     html += '<h3>' + pin.title + '</h3>';
     html += '<span class="pin-subtitle">The Cozy Kitchen</span>';
@@ -2007,7 +2101,7 @@ function buildStep3() {
 
     var html = '<div class="pin-card">';
     html += '<div class="pin-preview">';
-    html += '<div class="pin-preview-placeholder" style="background-image:url(' + imgSrc + ');">';
+    html += '<div class="pin-preview-placeholder pin-tpl-' + slug + '" style="background-image:url(' + imgSrc + ');">';
     html += '<div class="pin-overlay-text">';
     html += '<h3>' + pin.title + '</h3>';
     html += '<span class="pin-subtitle">The Cozy Kitchen</span>';
