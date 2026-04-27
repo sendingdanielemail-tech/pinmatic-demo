@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
 <style>
 
+
 /* ================================================================
    RESET & BASE
    ================================================================ */
@@ -147,9 +148,9 @@ button { cursor: pointer; font-family: inherit; }
 .wizard-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 10000;
   background: rgba(0,0,0,0.6);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   animation: fadeIn 0.2s ease;
@@ -863,13 +864,209 @@ button { cursor: pointer; font-family: inherit; }
 .wp-screen { display: none; }
 .wp-screen.active { display: block; }
 
-/* Override prototype styles when inside WP shell */
-#wp-pinmatic-screen .landing {
-  max-width: 100%; padding: 0;
-}
-#wp-pinmatic-screen .landing-header { display: none; }
-#wp-pinmatic-screen .landing-hero { margin-bottom: 20px; }
 
+
+
+/* ================================================================
+   PINMATIC DASHBOARD
+   ================================================================ */
+.pm-header {
+  margin-bottom: 24px;
+}
+.pm-header h1 {
+  font-size: 28px; font-weight: 700; color: #1d2327;
+  font-style: italic; margin-bottom: 4px;
+}
+.pm-header h1 .pm-pin-icon {
+  display: inline-block; margin-right: 4px; font-style: normal;
+}
+.pm-header .pm-tagline {
+  font-size: 14px; color: #787c82; font-weight: 400;
+}
+
+/* Tabs */
+.pm-tabs {
+  display: flex; gap: 0; border-bottom: 1px solid #c3c4c7;
+  margin-bottom: 24px;
+}
+.pm-tab {
+  padding: 10px 20px; font-size: 14px; color: #50575e;
+  text-decoration: none; border-bottom: 2px solid transparent;
+  cursor: pointer; background: none; border-top: none; border-left: none; border-right: none;
+  font-family: inherit;
+}
+.pm-tab:hover { color: #1d2327; }
+.pm-tab.active {
+  color: #1d2327; font-weight: 600;
+  border-bottom: 2px solid #1d2327;
+}
+
+/* Posts toolbar */
+.pm-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.pm-toolbar h2 {
+  font-size: 16px; font-weight: 400; color: #50575e;
+}
+.pm-toolbar select {
+  padding: 6px 28px 6px 10px; font-size: 13px;
+  border: 1px solid #8c8f94; border-radius: 4px;
+  background: #fff; color: #2c3338;
+  appearance: auto; cursor: pointer;
+}
+
+/* Post cards grid */
+.post-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+@media (max-width: 1100px) {
+  .post-cards-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 800px) {
+  .post-cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.post-card {
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: box-shadow 0.15s;
+}
+.post-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.post-card-thumb {
+  height: 140px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  background-size: cover; background-position: center;
+}
+        .post-card-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px 8px 0 0; }
+        
+.post-card-food-icon {
+  opacity: 0.6;
+}
+.post-card-body {
+  padding: 12px 14px;
+}
+.post-card-title {
+  font-size: 13px; font-weight: 600; color: #1d2327;
+  line-height: 1.4; margin-bottom: 10px;
+  min-height: 36px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.post-card-btn {
+  display: block; width: 100%;
+  padding: 8px 0; font-size: 13px; font-weight: 600;
+  background: #d63638; color: #fff; border: none;
+  border-radius: 4px; cursor: pointer;
+  transition: background 0.15s;
+}
+.post-card-btn:hover { background: #b32d2e; }
+
+
+/* ================================================================
+   TAB PANELS
+   ================================================================ */
+.pm-tab-panel { display: none; }
+.pm-tab-panel.active { display: block; }
+
+/* ================================================================
+   SCHEDULE TAB
+   ================================================================ */
+.schedule-header { margin-bottom: 16px; }
+.schedule-legend {
+  display: flex; gap: 16px; align-items: center; font-size: 13px;
+}
+.schedule-stat { margin-right: auto; color: #50575e; }
+.legend-item { display: flex; align-items: center; gap: 4px; color: #50575e; }
+.legend-dot {
+  width: 10px; height: 10px; border-radius: 50%; display: inline-block;
+}
+.legend-queued { background: #2271b1; }
+.legend-published { background: #00a32a; }
+.legend-failed { background: #d63638; }
+
+.cal-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.cal-nav h3 { font-size: 16px; font-weight: 600; margin: 0; }
+.cal-nav-btn {
+  background: #f0f0f1; border: 1px solid #c3c4c7; border-radius: 4px;
+  padding: 4px 12px; cursor: pointer; font-size: 14px;
+}
+.cal-nav-btn:hover { background: #e0e0e0; }
+
+.cal-grid {
+  width: 100%; border-collapse: collapse; background: #fff;
+  border: 1px solid #c3c4c7; table-layout: fixed;
+}
+.cal-grid th {
+  padding: 8px; text-align: center; font-size: 12px; font-weight: 600;
+  color: #50575e; background: #f6f7f7; border: 1px solid #dcdcde;
+}
+.cal-grid td {
+  padding: 6px; height: 80px; vertical-align: top; font-size: 12px;
+  color: #1d2327; border: 1px solid #dcdcde; position: relative;
+}
+.cal-grid td.cal-other { color: #c3c4c7; }
+.cal-event {
+  font-size: 11px; padding: 2px 6px; border-radius: 3px;
+  margin-top: 4px; color: #fff; cursor: pointer;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cal-queued { background: #2271b1; }
+.cal-published { background: #00a32a; }
+
+/* ================================================================
+   SETTINGS TAB
+   ================================================================ */
+.settings-container { max-width: 700px; }
+.settings-section-title {
+  font-size: 18px; font-weight: 600; color: #1d2327;
+  margin: 24px 0 4px; padding-top: 0;
+}
+.settings-section-title:first-child { margin-top: 0; }
+.settings-desc { font-size: 13px; color: #646970; margin-bottom: 16px; }
+.settings-table { width: 100%; border-spacing: 0; margin-bottom: 20px; }
+.settings-table th {
+  text-align: left; vertical-align: top; padding: 12px 12px 12px 0;
+  width: 200px; font-size: 13px; font-weight: 600; color: #1d2327;
+}
+.settings-table td { padding: 8px 0; }
+.settings-input {
+  width: 100%; max-width: 400px; padding: 6px 10px;
+  border: 1px solid #8c8f94; border-radius: 4px; font-size: 13px;
+}
+.settings-input-sm { max-width: 80px; }
+.settings-help { font-size: 12px; color: #646970; margin: 4px 0 0; }
+.settings-radio, .settings-checkbox {
+  display: block; font-size: 13px; margin-bottom: 6px; cursor: pointer;
+}
+.settings-radio input, .settings-checkbox input { margin-right: 6px; }
+.settings-btn {
+  background: #f0f0f1; border: 1px solid #c3c4c7; border-radius: 4px;
+  padding: 6px 14px; font-size: 13px; cursor: pointer;
+}
+.settings-btn:hover { background: #e0e0e0; }
+.settings-save-btn {
+  background: #2271b1; color: #fff; border: none; border-radius: 4px;
+  padding: 8px 20px; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+.settings-save-btn:hover { background: #135e96; }
+.settings-divider { border: none; border-top: 1px solid #dcdcde; margin: 24px 0; }
+.settings-logo-preview {
+  width: 120px; height: 40px; border: 1px solid #dcdcde; border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 8px; background: #f6f7f7;
+}
+.settings-logo-placeholder { font-size: 11px; color: #787c82; }
 </style>
 </head>
 <body>
@@ -881,9 +1078,10 @@ button { cursor: pointer; font-family: inherit; }
   <div class="wp-logo">
     <svg width="20" height="20" viewBox="0 0 122.52 122.52" fill="#c3c4c7"><path d="M8.708 61.26c0 20.802 12.089 38.779 29.619 47.298L13.258 39.872a52.354 52.354 0 00-4.55 21.388zm88.032-2.652c0-6.495-2.333-10.993-4.334-14.494-2.664-4.329-5.161-7.995-5.161-12.324 0-4.831 3.664-9.328 8.825-9.328.233 0 .454.029.681.042-9.35-8.566-21.807-13.796-35.489-13.796-18.36 0-34.513 9.42-43.91 23.688 1.233.037 2.395.063 3.382.063 5.497 0 14.006-.668 14.006-.668 2.833-.167 3.167 3.994.337 4.329 0 0-2.847.335-6.015.501L48.2 93.547l11.501-34.493-8.188-22.434c-2.83-.166-5.511-.501-5.511-.501-2.832-.166-2.5-4.496.332-4.329 0 0 8.679.668 13.843.668 5.496 0 14.006-.668 14.006-.668 2.834-.167 3.168 3.994.337 4.329 0 0-2.853.335-6.015.501l18.992 56.494 5.242-17.517c2.272-7.269 4.001-12.49 4.001-16.989z"/><path d="M62.184 65.857l-15.768 45.819a52.516 52.516 0 0032.644-.849 4.7 4.7 0 01-.377-.726L62.184 65.857zm45.125-29.836a48.66 48.66 0 01.382 6.851c0 6.764-1.264 14.369-5.093 23.869l-20.467 59.175C98.04 97.377 108.67 80.593 108.67 61.26c0-9.073-2.447-17.583-6.706-24.898l5.345-.341z"/><path d="M61.26 0C27.434 0 0 27.434 0 61.26s27.434 61.26 61.26 61.26 61.26-27.434 61.26-61.26S95.086 0 61.26 0zm0 119.715c-32.242 0-58.455-26.213-58.455-58.455S29.018 2.805 61.26 2.805s58.455 26.213 58.455 58.455-26.213 58.455-58.455 58.455z"/></svg>
   </div>
-  <a class="ab-item" href="#">Frugal Feast Recipes</a>
+  <a class="ab-item" href="#">The Frugal Feast!</a>
+  <span class="ab-item" style="color:#00ba37;font-size:11px;font-weight:600;background:#e6ffe6;padding:0 6px;border-radius:3px;margin-left:4px;">Live</span>
   <div class="ab-right">
-    <a class="ab-item" href="#">Howdy, Daniel</a>
+    <a class="ab-item" href="#">Howdy, Danny</a>
     <span class="avatar"></span>
   </div>
 </div>
@@ -893,19 +1091,18 @@ button { cursor: pointer; font-family: inherit; }
      ============================================================ -->
 <div id="adminmenuwrap">
   <ul id="adminmenu">
-    <li><a href="#" onclick="showWpScreen('dashboard'); return false;"><span class="dashicon">&#x1F3E0;</span> Dashboard</a></li>
+    <li><a href="#"><span class="dashicon">&#x1F3E0;</span> Dashboard</a></li>
     <li class="wp-menu-separator"></li>
-    <li id="menu-posts" class="current"><a href="#" onclick="showWpScreen('posts'); return false;"><span class="dashicon">&#x1F4CC;</span> Posts</a></li>
+    <li><a href="#"><span class="dashicon">&#x1F4CC;</span> Posts</a></li>
+    <li><a href="#"><span class="dashicon">&#x1F4F7;</span> Media</a></li>
     <li><a href="#"><span class="dashicon">&#x1F4C4;</span> Pages</a></li>
     <li><a href="#"><span class="dashicon">&#x1F4AC;</span> Comments</a></li>
     <li class="wp-menu-separator"></li>
+    <li id="menu-pinmatic" class="pinmatic-menu current"><a href="#"><span class="dashicon">&#x1F4CD;</span> Pinmatic</a></li>
+    <li class="wp-menu-separator"></li>
     <li><a href="#"><span class="dashicon">&#x1F3A8;</span> Appearance</a></li>
     <li><a href="#"><span class="dashicon">&#x1F50C;</span> Plugins</a></li>
-    <li><a href="#"><span class="dashicon">&#x1F465;</span> Users</a></li>
-    <li><a href="#"><span class="dashicon">&#x1F527;</span> Tools</a></li>
     <li><a href="#"><span class="dashicon">&#x2699;&#xFE0F;</span> Settings</a></li>
-    <li class="wp-menu-separator"></li>
-    <li id="menu-pinmatic" class="pinmatic-menu"><a href="#" onclick="showWpScreen('pinmatic'); return false;"><span class="dashicon">&#x1F4CD;</span> Pinmatic</a></li>
   </ul>
 </div>
 
@@ -915,188 +1112,261 @@ button { cursor: pointer; font-family: inherit; }
 <div id="wpcontent">
   <div class="wp-content-inner">
 
-    <!-- ── WP SCREEN: POSTS LIST ── -->
-    <div id="wp-posts-screen" class="wp-screen active">
-      <div class="wp-header-row">
-        <h1 class="wp-heading-inline">Posts</h1>
-        <a href="#" class="page-title-action">Add New Post</a>
-      </div>
-
-      <div class="wp-notice notice-info">
-        <strong>Pinmatic is active!</strong> Hover over any published post and click <strong>"Create Pins"</strong> to generate Pinterest pins automatically.
-      </div>
-
-      <ul class="subsubsub">
-        <li><a href="#" class="current">All <span class="count">(24)</span></a> |</li>
-        <li><a href="#">Published <span class="count">(22)</span></a> |</li>
-        <li><a href="#">Drafts <span class="count">(2)</span></a></li>
-      </ul>
-
-      <table class="wp-list-table">
-        <thead>
-          <tr>
-            <th style="width:4%"><input type="checkbox"></th>
-            <th style="width:42%">Title</th>
-            <th style="width:16%">Author</th>
-            <th style="width:16%">Categories</th>
-            <th style="width:12%">Tags</th>
-            <th style="width:10%">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <span class="post-title">Quick Vietnamese Baguettes (Banh Mi Style)</span>
-              <span class="post-status"> &mdash; Published</span>
-              <div class="row-actions">
-                <a href="#">Edit</a> | 
-                <a href="#">Quick Edit</a> | 
-                <a href="#">Trash</a> | 
-                <a href="#">View</a> | 
-                <a href="#" class="create-pins" onclick="launchPinmatic(); return false;">Create Pins</a>
-              </div>
-            </td>
-            <td>Daniel</td>
-            <td>Bread &amp; Baking</td>
-            <td>Vietnamese, Quick</td>
-            <td class="column-date">April 18, 2026</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <span class="post-title">15-Minute Garlic Butter Shrimp</span>
-              <span class="post-status"> &mdash; Published</span>
-              <div class="row-actions">
-                <a href="#">Edit</a> | 
-                <a href="#">Quick Edit</a> | 
-                <a href="#">Trash</a> | 
-                <a href="#">View</a> | 
-                <a href="#" class="create-pins">Create Pins</a>
-              </div>
-            </td>
-            <td>Daniel</td>
-            <td>Seafood</td>
-            <td>Quick, Budget</td>
-            <td class="column-date">April 12, 2026</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <span class="post-title">One-Pot Chicken Adobo</span>
-              <span class="post-status"> &mdash; Published</span>
-              <div class="row-actions">
-                <a href="#">Edit</a> | 
-                <a href="#">Quick Edit</a> | 
-                <a href="#">Trash</a> | 
-                <a href="#">View</a> | 
-                <a href="#" class="create-pins">Create Pins</a>
-              </div>
-            </td>
-            <td>Daniel</td>
-            <td>Filipino</td>
-            <td>One-pot, Chicken</td>
-            <td class="column-date">April 5, 2026</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <span class="post-title">Crispy Tofu Buddha Bowl</span>
-              <span class="post-status"> &mdash; Published</span>
-              <div class="row-actions">
-                <a href="#">Edit</a> | 
-                <a href="#">Quick Edit</a> | 
-                <a href="#">Trash</a> | 
-                <a href="#">View</a> | 
-                <a href="#" class="create-pins">Create Pins</a>
-              </div>
-            </td>
-            <td>Daniel</td>
-            <td>Vegetarian</td>
-            <td>Meal Prep, Healthy</td>
-            <td class="column-date">March 28, 2026</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <span class="post-title">$5 Sheet Pan Fajitas</span>
-              <span class="post-status"> &mdash; Published</span>
-              <div class="row-actions">
-                <a href="#">Edit</a> | 
-                <a href="#">Quick Edit</a> | 
-                <a href="#">Trash</a> | 
-                <a href="#">View</a> | 
-                <a href="#" class="create-pins">Create Pins</a>
-              </div>
-            </td>
-            <td>Daniel</td>
-            <td>Mexican</td>
-            <td>Budget, Family</td>
-            <td class="column-date">March 20, 2026</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>
-              <span class="post-title">Slow Cooker Lentil Soup</span>
-              <span class="post-status"> &mdash; Draft</span>
-              <div class="row-actions">
-                <a href="#">Edit</a> | 
-                <a href="#">Quick Edit</a> | 
-                <a href="#">Trash</a> | 
-                <a href="#">Preview</a>
-              </div>
-            </td>
-            <td>Daniel</td>
-            <td>Soups</td>
-            <td>Slow Cooker, Vegan</td>
-            <td class="column-date">March 15, 2026</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- ── PINMATIC DASHBOARD ── -->
+    <div class="pm-header">
+      <h1><span class="pm-pin-icon">&#x1F4CD;</span> <em>PinMatic</em></h1>
+      <span class="pm-tagline">Automatically create, schedule and manage your pins</span>
     </div>
 
-    <!-- ── WP SCREEN: PINMATIC ── -->
-    <div id="wp-pinmatic-screen" class="wp-screen">
-      <div class="wp-header-row">
-        <h1 class="wp-heading-inline">Pinmatic</h1>
-      </div>
-      
-      <!-- ============================================================
-     SCREEN 0: LANDING CONTEXT
-     ============================================================ -->
-<div id="screen-landing" class="screen active">
-  <div class="landing">
-    <div class="landing-header">
-      <span class="landing-logo">Pinmatic</span>
-      <span class="landing-badge">Interactive Demo</span>
+    <div class="pm-tabs">
+      <button class="pm-tab active" onclick="switchTab('posts', this)">My posts</button>
+      <button class="pm-tab" onclick="switchTab('schedule', this)">Pin schedule</button>
+      <button class="pm-tab" onclick="switchTab('settings', this)">Settings</button>
     </div>
 
-    <div class="landing-hero">
-      <div class="landing-hero-img" style="background: linear-gradient(135deg, #d4a574 0%, #c4956a 40%, #a67c52 100%); display: flex; align-items: center; justify-content: center;">
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none"><rect width="80" height="80" rx="12" fill="rgba(255,255,255,0.15)"/><path d="M25 55V30a5 5 0 015-5h20a5 5 0 015 5v25M20 55h40M32 25v-5a8 8 0 0116 0v5M35 40h10M35 48h6" stroke="rgba(255,255,255,0.6)" stroke-width="2.5" stroke-linecap="round"/></svg>
-      </div>
-      <div class="landing-hero-body">
-        <h1>Quick Vietnamese Baguettes (Banh Mi Style)</h1>
-        <p>Crispy on the outside, pillowy soft inside. These 45-minute baguettes are perfect for banh mi sandwiches or alongside a warm bowl of pho.</p>
-        <div class="landing-meta">
-          <span>Published: April 18, 2026</span>
-          <span>Category: Bread &amp; Baking</span>
-          <span>12 min read</span>
+    <!-- TAB: My Posts -->
+    <div id="tab-posts" class="pm-tab-panel active">
+    <div class="pm-toolbar">
+      <h2>Select a blog post to get started</h2>
+      <select>
+        <option>Show all posts</option>
+        <option>Published</option>
+        <option>Drafts</option>
+        <option>Has pins</option>
+        <option>No pins yet</option>
+      </select>
+    </div>
+
+    <div class="post-cards-grid">
+
+        <div class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=280&fit=crop" alt="Pasta dish">
+          </div>
+          <div class="post-card-body">
+            <h3 class="post-card-title">Creamy Garlic Tuscan Pasta in 20 Minutes</h3>
+            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+          </div>
+        </div>
+        <div class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=280&fit=crop" alt="Fresh bread">
+          </div>
+          <div class="post-card-body">
+            <h3 class="post-card-title">Crusty No-Knead Artisan Bread (So Easy!)</h3>
+            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+          </div>
+        </div>
+        <div class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=280&fit=crop" alt="Colorful salad">
+          </div>
+          <div class="post-card-body">
+            <h3 class="post-card-title">Rainbow Buddha Bowl with Tahini Dressing</h3>
+            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+          </div>
+        </div>
+        <div class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=280&fit=crop" alt="Tomato soup">
+          </div>
+          <div class="post-card-body">
+            <h3 class="post-card-title">The Best Slow Cooker Tomato Basil Soup</h3>
+            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+          </div>
+        </div>
+        <div class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400&h=280&fit=crop" alt="Curry dish">
+          </div>
+          <div class="post-card-body">
+            <h3 class="post-card-title">Easy Weeknight Coconut Chickpea Curry</h3>
+            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+          </div>
+        </div>
+        <div class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=280&fit=crop" alt="Rice bowl">
+          </div>
+          <div class="post-card-body">
+            <h3 class="post-card-title">Crispy Sesame Tofu Power Bowl</h3>
+            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+          </div>
+        </div>
+        <div class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400&h=280&fit=crop" alt="Tacos">
+          </div>
+          <div class="post-card-body">
+            <h3 class="post-card-title">$5 Sheet Pan Chicken Tacos for Four</h3>
+            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+          </div>
+        </div>
+        <div class="post-card">
+          <div class="post-card-thumb">
+            <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=280&fit=crop" alt="Shrimp stir fry">
+          </div>
+          <div class="post-card-body">
+            <h3 class="post-card-title">15-Minute Honey Honey Shrimp Stir-Fry</h3>
+            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+          </div>
+        </div>
+    </div>
+    </div><!-- end tab-posts -->
+
+    <!-- TAB: Pin Schedule -->
+    <div id="tab-schedule" class="pm-tab-panel">
+      <div class="schedule-container">
+        <div class="schedule-header">
+          <div class="schedule-legend">
+            <span class="schedule-stat"><strong>3</strong> pins queued</span>
+            <span class="legend-item"><span class="legend-dot legend-queued"></span> Queued</span>
+            <span class="legend-item"><span class="legend-dot legend-published"></span> Published</span>
+            <span class="legend-item"><span class="legend-dot legend-failed"></span> Failed</span>
+          </div>
+        </div>
+
+        <div class="schedule-calendar">
+          <div class="cal-nav">
+            <button class="cal-nav-btn">&larr;</button>
+            <h3>April 2026</h3>
+            <button class="cal-nav-btn">&rarr;</button>
+          </div>
+          <table class="cal-grid">
+            <thead>
+              <tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="cal-other">29</td><td class="cal-other">30</td><td class="cal-other">31</td>
+                <td>1</td><td>2</td><td>3</td><td>4</td>
+              </tr>
+              <tr>
+                <td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td>
+              </tr>
+              <tr>
+                <td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td>
+                <td>18<div class="cal-event cal-published">Tuscan Pasta Pin</div></td>
+              </tr>
+              <tr>
+                <td>19</td><td>20</td>
+                <td>21<div class="cal-event cal-published">Artisan Bread Pin</div></td>
+                <td>22</td><td>23</td>
+                <td>24<div class="cal-event cal-queued">Buddha Bowl Pin</div></td>
+                <td>25</td>
+              </tr>
+              <tr>
+                <td>26</td>
+                <td>27<div class="cal-event cal-queued">Tomato Soup Pin</div></td>
+                <td>28</td><td>29</td>
+                <td>30<div class="cal-event cal-queued">Chickpea Curry Pin</div></td>
+                <td class="cal-other">1</td><td class="cal-other">2</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </div>
+    </div><!-- end tab-schedule -->
 
-    <div class="landing-prompt">
-      <h2>Ready to create Pinterest pins for this post?</h2>
-      <p>Pinmatic generates beautiful pins, writes the copy, and schedules them to Pinterest — all in under 2 minutes.</p>
-      <button class="btn-primary" onclick="openWizard()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-        Create Pins
-      </button>
-    </div>
+    <!-- TAB: Settings -->
+    <div id="tab-settings" class="pm-tab-panel">
+      <div class="settings-container">
+
+        <h2 class="settings-section-title">API Credentials</h2>
+        <p class="settings-desc">Enter your API credentials below. You can find these in your respective service dashboards.</p>
+
+        <table class="settings-table">
+          <tr>
+            <th><label>Gemini API Key</label></th>
+            <td><input type="text" value="AIza••••••••••••••••••" class="settings-input" readonly>
+            <p class="settings-help">Used for AI-powered pin copy generation.</p></td>
+          </tr>
+          <tr>
+            <th><label>Pinterest Access Token</label></th>
+            <td><input type="text" value="pina_••••••••••••••••" class="settings-input" readonly>
+            <p class="settings-help">Your Pinterest API v5 access token.</p></td>
+          </tr>
+          <tr>
+            <th><label>Pinterest API Mode</label></th>
+            <td>
+              <label class="settings-radio"><input type="radio" name="env" checked> <strong>Sandbox</strong> — Test without publishing real pins</label>
+              <label class="settings-radio"><input type="radio" name="env"> <strong>Production</strong> — Publish live pins to Pinterest</label>
+            </td>
+          </tr>
+          <tr>
+            <th><label>Default Pinterest Board</label></th>
+            <td>
+              <select class="settings-input"><option>Frugal Feast Recipes</option><option>Budget Meals</option><option>Quick Dinners</option></select>
+            </td>
+          </tr>
+        </table>
+
+        <h2 class="settings-section-title">Pin Image Generation</h2>
+        <p class="settings-desc">Customize how your generated pin images look.</p>
+
+        <table class="settings-table">
+          <tr>
+            <th><label>Pin Subtitle (Blog Name)</label></th>
+            <td><input type="text" value="Frugal Feast Recipes" class="settings-input" maxlength="50">
+            <p class="settings-help">Shown at the bottom of generated pins. Max 50 characters.</p></td>
+          </tr>
+          <tr>
+            <th><label>Pin Logo</label></th>
+            <td>
+              <div class="settings-logo-preview">
+                <div class="settings-logo-placeholder">Logo uploaded</div>
+              </div>
+              <button class="settings-btn">Change Logo</button>
+            </td>
+          </tr>
+        </table>
+
+        <h2 class="settings-section-title">Pin Scheduling</h2>
+        <p class="settings-desc">Control how pins are automatically scheduled.</p>
+
+        <table class="settings-table">
+          <tr>
+            <th><label>Max Pins Per Day</label></th>
+            <td><input type="number" value="2" min="1" max="10" class="settings-input settings-input-sm">
+            <p class="settings-help">Pinterest recommends 1-5 pins per day for best engagement.</p></td>
+          </tr>
+          <tr>
+            <th><label>Days Between Same-Post Pins</label></th>
+            <td><input type="number" value="3" min="1" max="30" class="settings-input settings-input-sm">
+            <p class="settings-help">Minimum gap before pinning the same blog post again.</p></td>
+          </tr>
+          <tr>
+            <th><label>Preferred Posting Times</label></th>
+            <td>
+              <label class="settings-checkbox"><input type="checkbox"> 8:00 AM</label>
+              <label class="settings-checkbox"><input type="checkbox"> 12:00 PM</label>
+              <label class="settings-checkbox"><input type="checkbox" checked> 5:00 PM</label>
+              <label class="settings-checkbox"><input type="checkbox" checked> 8:00 PM</label>
+              <p class="settings-help">Peak Pinterest engagement times. We'll spread pins across these windows.</p>
+            </td>
+          </tr>
+        </table>
+
+        <hr class="settings-divider">
+
+        <h2 class="settings-section-title">Test API Connections</h2>
+        <p class="settings-desc">Save your settings first, then click below to verify all API keys are working.</p>
+        <button class="settings-btn" onclick="testConnections()">Test All Connections</button>
+        <div id="test-results"></div>
+
+        <div style="margin-top: 24px;">
+          <button class="settings-save-btn">Save Settings</button>
+        </div>
+
+      </div>
+    </div><!-- end tab-settings -->
+
   </div>
 </div>
 
+<!-- ============================================================
+     WIZARD OVERLAY (from original prototype)
+     ============================================================ -->
 <!-- ============================================================
      WIZARD OVERLAY (Steps 1–3 + Success)
      ============================================================ -->
@@ -1330,18 +1600,13 @@ button { cursor: pointer; font-family: inherit; }
 </div>
     </div>
 
-    <!-- ── WP SCREEN: DASHBOARD (placeholder) ── -->
-    <div id="wp-dashboard-screen" class="wp-screen">
-      <div class="wp-header-row">
-        <h1 class="wp-heading-inline">Dashboard</h1>
-      </div>
-      <div class="wp-notice">
-        Welcome to WordPress! This is a demo environment. Click <strong>Posts</strong> in the sidebar to see your blog posts, then use <strong>Create Pins</strong> to try Pinmatic.
-      </div>
-    </div>
 
   </div>
 </div>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
 
 <!-- ============================================================
      SCRIPTS
@@ -1357,7 +1622,7 @@ var feedbackData = {};
 var pinData = {
   classic_dark: {
     name: 'Classic Dark',
-    title: 'Quick Vietnamese Baguettes You Can Make Tonight',
+    title: 'Quick Artisan Breads You Can Make Tonight',
     desc: 'Crispy, golden baguettes in just 45 minutes. Perfect for banh mi sandwiches or alongside a steaming bowl of pho. No bread machine needed!',
     bg: 'linear-gradient(135deg, #3d2b1f, #5a3e2b)'
   },
@@ -1369,7 +1634,7 @@ var pinData = {
   },
   minimal_light: {
     name: 'Minimal Light',
-    title: '45-Minute Vietnamese Baguettes',
+    title: '45-Minute Artisan Breads',
     desc: 'A simple, foolproof recipe for crusty homemade baguettes. Light, airy crumb with a shattery crust. Your banh mi game just leveled up.',
     bg: 'linear-gradient(135deg, #f5f0e8, #e8ddd0)'
   },
@@ -1381,7 +1646,7 @@ var pinData = {
   },
   elegant_frame: {
     name: 'Elegant Frame',
-    title: 'Vietnamese Baguettes: A 45-Minute Wonder',
+    title: 'Artisan Breads: A 45-Minute Wonder',
     desc: 'Restaurant-quality baguettes at home. Golden crust, pillowy interior, and that signature lightness that makes banh mi bread special.',
     bg: 'linear-gradient(135deg, #2c2c2c, #4a4a4a)'
   },
@@ -1397,17 +1662,13 @@ var pinData = {
    WIZARD CONTROLS
    ================================================================ */
 function openWizard() {
-  document.getElementById('screen-landing').classList.remove('active');
   var overlay = document.getElementById('wizard-overlay');
-  overlay.classList.add('active');
   overlay.style.display = 'flex';
 }
 
 function closeWizard() {
   var overlay = document.getElementById('wizard-overlay');
-  overlay.classList.remove('active');
   overlay.style.display = 'none';
-  document.getElementById('screen-landing').classList.add('active');
   resetWizard();
 }
 
@@ -1710,37 +1971,36 @@ function submitFeedback() {
 
 <script>
 /* ================================================================
-   WP ADMIN SHELL CONTROLS
+   LAUNCH PINMATIC FROM POST CARD
    ================================================================ */
-function showWpScreen(screen) {
-  // Hide all WP screens
-  document.querySelectorAll('.wp-screen').forEach(function(s) { s.classList.remove('active'); });
-  
-  // Remove current from all menu items
-  document.querySelectorAll('#adminmenu li').forEach(function(li) { li.classList.remove('current'); });
-  
-  if (screen === 'posts') {
-    document.getElementById('wp-posts-screen').classList.add('active');
-    document.getElementById('menu-posts').classList.add('current');
-  } else if (screen === 'pinmatic') {
-    document.getElementById('wp-pinmatic-screen').classList.add('active');
-    document.getElementById('menu-pinmatic').classList.add('current');
-    // Show the landing screen of the prototype
-    document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
-    document.getElementById('screen-landing').classList.add('active');
-  } else if (screen === 'dashboard') {
-    document.getElementById('wp-dashboard-screen').classList.add('active');
-  }
-}
-
 function launchPinmatic() {
-  showWpScreen('pinmatic');
-  // Auto-open the wizard since they clicked from a specific post
-  setTimeout(function() {
-    openWizard();
-  }, 400);
+  openWizard();
 }
 </script>
 
+
+<script>
+/* ================================================================
+   TAB SWITCHING
+   ================================================================ */
+function switchTab(tab, btn) {
+  // Hide all tab panels
+  document.querySelectorAll('.pm-tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  // Deactivate all tab buttons
+  document.querySelectorAll('.pm-tab').forEach(function(t) { t.classList.remove('active'); });
+  // Show selected tab
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+function testConnections() {
+  var results = document.getElementById('test-results');
+  results.innerHTML = '<table style="margin-top:12px;border-collapse:collapse;width:100%;max-width:400px;font-size:13px;">' +
+    '<tr><td style="padding:6px;border-bottom:1px solid #dcdcde;">Gemini API</td><td style="padding:6px;border-bottom:1px solid #dcdcde;color:#00a32a;font-weight:600;">Connected</td></tr>' +
+    '<tr><td style="padding:6px;border-bottom:1px solid #dcdcde;">Pinterest API</td><td style="padding:6px;border-bottom:1px solid #dcdcde;color:#00a32a;font-weight:600;">Connected</td></tr>' +
+    '<tr><td style="padding:6px;">Pinterest Board</td><td style="padding:6px;color:#00a32a;font-weight:600;">Found (Frugal Feast Recipes)</td></tr>' +
+    '</table>';
+}
+</script>
 </body>
 </html>
