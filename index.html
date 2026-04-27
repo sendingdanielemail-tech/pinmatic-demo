@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Pinmatic Demo — WordPress Admin Preview</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Oswald:wght@600;700&family=DM+Serif+Display&family=Lora:wght@700&family=Cormorant+Garamond:wght@600;700&family=Poppins:wght@600;700&family=Space+Grotesk:wght@600;700&family=Caveat:wght@700&family=Montserrat:wght@600;700&family=Merriweather:wght@700&display=swap">
 <style>
 
 
@@ -395,41 +396,47 @@ button { cursor: pointer; font-family: inherit; }
   background: linear-gradient(to top, rgba(30,20,15,0.92) 0%, rgba(30,20,15,0.7) 70%, transparent 100%);
   color: #fff; padding-top: 30px;
 }
+.pin-tpl-classic_dark .pin-overlay-text h3 { font-family: 'Playfair Display', Georgia, serif; }
 /* Bold Banner: solid red banner, ALL CAPS white text */
 .pin-tpl-bold_banner .pin-overlay-text {
   background: #c0392b; color: #fff;
 }
 .pin-tpl-bold_banner .pin-overlay-text h3 {
   text-transform: uppercase; font-size: 14px; letter-spacing: 0.5px;
+  font-family: 'Oswald', Impact, sans-serif;
 }
 /* Minimal Light: white block, dark text, subtle top border */
 .pin-tpl-minimal_light .pin-overlay-text {
   background: rgba(255,255,255,0.94); color: #333;
   border-top: 2px solid #ddd;
 }
+.pin-tpl-minimal_light .pin-overlay-text h3 { font-family: 'DM Serif Display', Georgia, serif; font-weight: 400; }
 .pin-tpl-minimal_light .pin-overlay-text .pin-subtitle { color: #888; }
 /* Earthy Kitchen: sage green block, white text, thin line */
 .pin-tpl-earthy_kitchen .pin-overlay-text {
   background: #5a6b4a; color: #fff;
   border-top: 2px solid rgba(255,255,255,0.25);
 }
+.pin-tpl-earthy_kitchen .pin-overlay-text h3 { font-family: 'Lora', Georgia, serif; }
 /* Elegant Frame: semi-transparent dark band, white text */
 .pin-tpl-elegant_frame .pin-overlay-text {
   background: rgba(55,55,55,0.85); color: #fff;
   border-top: 1px solid rgba(200,180,140,0.4);
   border-bottom: 1px solid rgba(200,180,140,0.4);
 }
+.pin-tpl-elegant_frame .pin-overlay-text h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; }
 /* Sunset Glow: warm gradient overlay, white text */
 .pin-tpl-sunset_glow .pin-overlay-text {
   background: linear-gradient(to top, rgba(140,40,50,0.85) 0%, rgba(180,80,60,0.6) 70%, transparent 100%);
   color: #fff; padding-top: 30px;
 }
+.pin-tpl-sunset_glow .pin-overlay-text h3 { font-family: 'Poppins', sans-serif; }
 /* Magazine Cover: dark overlay, serif-like italic feel */
 .pin-tpl-magazine_cover .pin-overlay-text {
   background: linear-gradient(to top, rgba(10,10,20,0.8) 0%, rgba(10,10,20,0.5) 70%, transparent 100%);
   color: #fff; padding-top: 30px;
 }
-.pin-tpl-magazine_cover .pin-overlay-text h3 { font-style: italic; }
+.pin-tpl-magazine_cover .pin-overlay-text h3 { font-family: 'Playfair Display', Georgia, serif; font-style: italic; }
 /* Neon Pop: dark navy block, uppercase, pink accent line */
 .pin-tpl-neon_pop .pin-overlay-text {
   background: #1a1a2e; color: #fff;
@@ -437,12 +444,13 @@ button { cursor: pointer; font-family: inherit; }
 }
 .pin-tpl-neon_pop .pin-overlay-text h3 {
   text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px;
+  font-family: 'Space Grotesk', sans-serif;
 }
 /* Torn Paper: cream/white strip, dark text */
 .pin-tpl-torn_paper .pin-overlay-text {
   background: rgba(255,250,240,0.92); color: #3a3a3a;
 }
-.pin-tpl-torn_paper .pin-overlay-text h3 { font-style: italic; font-weight: 400; }
+.pin-tpl-torn_paper .pin-overlay-text h3 { font-family: 'Caveat', cursive; font-weight: 700; font-style: normal; font-size: 18px; }
 .pin-tpl-torn_paper .pin-overlay-text .pin-subtitle { color: #888; }
 /* Split Diagonal: dark navy block, uppercase */
 .pin-tpl-split_diagonal .pin-overlay-text {
@@ -451,17 +459,20 @@ button { cursor: pointer; font-family: inherit; }
 }
 .pin-tpl-split_diagonal .pin-overlay-text h3 {
   text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px;
+  font-family: 'Montserrat', sans-serif;
 }
 /* Soft Blush: pink overlay, white text */
 .pin-tpl-soft_blush .pin-overlay-text {
   background: linear-gradient(to top, rgba(220,170,170,0.8) 0%, rgba(230,190,190,0.5) 70%, transparent 100%);
   color: #fff; padding-top: 30px;
 }
+.pin-tpl-soft_blush .pin-overlay-text h3 { font-family: 'Cormorant Garamond', Georgia, serif; }
 /* Recipe Card: white card area, dark text, red line */
 .pin-tpl-recipe_card .pin-overlay-text {
   background: rgba(255,248,240,0.95); color: #333;
   border-top: 2px solid #d63638;
 }
+.pin-tpl-recipe_card .pin-overlay-text h3 { font-family: 'Merriweather', Georgia, serif; }
 .pin-tpl-recipe_card .pin-overlay-text .pin-subtitle { color: #888; }
 .pin-fields { flex: 1; min-width: 0; }
 .pin-fields h3 { font-size: 15px; font-weight: 600; margin: 0 0 12px; }
