@@ -931,48 +931,79 @@ button { cursor: pointer; font-family: inherit; }
 
 .post-card {
   background: #fff;
-  border: 1px solid #dcdcde;
-  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
   overflow: hidden;
-  transition: box-shadow 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
 .post-card:hover {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-color: #2271b1;
+  box-shadow: 0 2px 8px rgba(34, 113, 177, 0.1);
 }
+
+/* Thumbnail — 3:2 aspect ratio like real plugin */
 .post-card-thumb {
-  height: 140px;
   position: relative;
+  width: 100%;
+  padding-top: 66%;
   overflow: hidden;
-  border-radius: 8px 8px 0 0;
 }
 .post-card-thumb img {
-  display: block;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   object-fit: cover;
 }
-        
-.post-card-food-icon {
-  opacity: 0.6;
+
+/* Pin count badge */
+.post-card-badge {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-size: 11px; font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  z-index: 2;
 }
+
+/* Card body */
 .post-card-body {
   padding: 12px 14px;
 }
 .post-card-title {
+  margin: 0 0 10px;
   font-size: 13px; font-weight: 600; color: #1d2327;
-  line-height: 1.4; margin-bottom: 10px;
+  line-height: 1.4;
   min-height: 36px;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
   overflow: hidden;
 }
-.post-card-btn {
-  display: block; width: 100%;
-  padding: 8px 0; font-size: 13px; font-weight: 600;
-  background: #d63638; color: #fff; border: none;
-  border-radius: 4px; cursor: pointer;
-  transition: background 0.15s;
+
+/* Dual button row */
+.post-card-actions {
+  display: flex;
+  gap: 6px;
 }
-.post-card-btn:hover { background: #b32d2e; }
+.post-card-btn {
+  flex: 1;
+  padding: 8px 0; font-size: 12px; font-weight: 600;
+  border-radius: 4px; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  text-align: center;
+}
+.post-card-btn-primary {
+  background: #d63638; color: #fff; border: none;
+}
+.post-card-btn-primary:hover { background: #b32d2e; }
+.post-card-btn-secondary {
+  background: #fff; color: #2271b1;
+  border: 1px solid #2271b1;
+}
+.post-card-btn-secondary:hover {
+  background: #f0f6fc; border-color: #135e96;
+  color: #135e96;
+}
 
 
 /* ================================================================
@@ -1065,6 +1096,15 @@ button { cursor: pointer; font-family: inherit; }
   padding: 8px 20px; font-size: 14px; font-weight: 600; cursor: pointer;
 }
 .settings-save-btn:hover { background: #135e96; }
+
+/* Settings — Connect Pinterest card */
+.settings-connect-section { margin-bottom: 20px; }
+.settings-connect-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px 20px;
+  background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
+}
+.settings-connect-info { flex: 1; }
 .settings-divider { border: none; border-top: 1px solid #dcdcde; margin: 24px 0; }
 .settings-logo-preview {
   width: 120px; height: 40px; border: 1px solid #dcdcde; border-radius: 4px;
@@ -1146,20 +1186,28 @@ button { cursor: pointer; font-family: inherit; }
 
         <div class="post-card">
           <div class="post-card-thumb">
+            <span class="post-card-badge">1 pin</span>
             <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&h=280&fit=crop" alt="Pasta dish">
           </div>
           <div class="post-card-body">
             <h3 class="post-card-title">Creamy Garlic Tuscan Pasta in 20 Minutes</h3>
-            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+            <div class="post-card-actions">
+              <button class="post-card-btn post-card-btn-primary" onclick="launchPinmatic()">Create pin</button>
+              <button class="post-card-btn post-card-btn-secondary" onclick="uploadPin()">Upload pin</button>
+            </div>
           </div>
         </div>
         <div class="post-card">
           <div class="post-card-thumb">
+            <span class="post-card-badge">1 pin</span>
             <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&h=280&fit=crop" alt="Fresh bread">
           </div>
           <div class="post-card-body">
             <h3 class="post-card-title">Crusty No-Knead Artisan Bread (So Easy!)</h3>
-            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+            <div class="post-card-actions">
+              <button class="post-card-btn post-card-btn-primary" onclick="launchPinmatic()">Create pin</button>
+              <button class="post-card-btn post-card-btn-secondary" onclick="uploadPin()">Upload pin</button>
+            </div>
           </div>
         </div>
         <div class="post-card">
@@ -1168,7 +1216,10 @@ button { cursor: pointer; font-family: inherit; }
           </div>
           <div class="post-card-body">
             <h3 class="post-card-title">Rainbow Buddha Bowl with Tahini Dressing</h3>
-            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+            <div class="post-card-actions">
+              <button class="post-card-btn post-card-btn-primary" onclick="launchPinmatic()">Create pin</button>
+              <button class="post-card-btn post-card-btn-secondary" onclick="uploadPin()">Upload pin</button>
+            </div>
           </div>
         </div>
         <div class="post-card">
@@ -1177,16 +1228,23 @@ button { cursor: pointer; font-family: inherit; }
           </div>
           <div class="post-card-body">
             <h3 class="post-card-title">The Best Slow Cooker Tomato Basil Soup</h3>
-            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+            <div class="post-card-actions">
+              <button class="post-card-btn post-card-btn-primary" onclick="launchPinmatic()">Create pin</button>
+              <button class="post-card-btn post-card-btn-secondary" onclick="uploadPin()">Upload pin</button>
+            </div>
           </div>
         </div>
         <div class="post-card">
           <div class="post-card-thumb">
+            <span class="post-card-badge">1 pin</span>
             <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=400&h=280&fit=crop" alt="Curry dish">
           </div>
           <div class="post-card-body">
             <h3 class="post-card-title">Easy Weeknight Coconut Chickpea Curry</h3>
-            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+            <div class="post-card-actions">
+              <button class="post-card-btn post-card-btn-primary" onclick="launchPinmatic()">Create pin</button>
+              <button class="post-card-btn post-card-btn-secondary" onclick="uploadPin()">Upload pin</button>
+            </div>
           </div>
         </div>
         <div class="post-card">
@@ -1195,7 +1253,10 @@ button { cursor: pointer; font-family: inherit; }
           </div>
           <div class="post-card-body">
             <h3 class="post-card-title">Crispy Sesame Tofu Power Bowl</h3>
-            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+            <div class="post-card-actions">
+              <button class="post-card-btn post-card-btn-primary" onclick="launchPinmatic()">Create pin</button>
+              <button class="post-card-btn post-card-btn-secondary" onclick="uploadPin()">Upload pin</button>
+            </div>
           </div>
         </div>
         <div class="post-card">
@@ -1204,7 +1265,10 @@ button { cursor: pointer; font-family: inherit; }
           </div>
           <div class="post-card-body">
             <h3 class="post-card-title">$5 Sheet Pan Chicken Tacos for Four</h3>
-            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+            <div class="post-card-actions">
+              <button class="post-card-btn post-card-btn-primary" onclick="launchPinmatic()">Create pin</button>
+              <button class="post-card-btn post-card-btn-secondary" onclick="uploadPin()">Upload pin</button>
+            </div>
           </div>
         </div>
         <div class="post-card">
@@ -1212,8 +1276,11 @@ button { cursor: pointer; font-family: inherit; }
             <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&h=280&fit=crop" alt="Shrimp stir fry">
           </div>
           <div class="post-card-body">
-            <h3 class="post-card-title">15-Minute Honey Honey Shrimp Stir-Fry</h3>
-            <button class="post-card-btn" onclick="launchPinmatic()">Create pin</button>
+            <h3 class="post-card-title">15-Minute Honey Garlic Shrimp Stir-Fry</h3>
+            <div class="post-card-actions">
+              <button class="post-card-btn post-card-btn-primary" onclick="launchPinmatic()">Create pin</button>
+              <button class="post-card-btn post-card-btn-secondary" onclick="uploadPin()">Upload pin</button>
+            </div>
           </div>
         </div>
     </div>
@@ -1277,59 +1344,90 @@ button { cursor: pointer; font-family: inherit; }
     <div id="tab-settings" class="pm-tab-panel">
       <div class="settings-container">
 
-        <h2 class="settings-section-title">API Credentials</h2>
-        <p class="settings-desc">Enter your API credentials below. You can find these in your respective service dashboards.</p>
+        <!-- Connect Pinterest Section -->
+        <div class="settings-connect-section">
+          <div class="settings-connect-card">
+            <div class="settings-connect-icon">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                <circle cx="18" cy="18" r="18" fill="#E60023"/>
+                <path d="M18 8C12.48 8 8 12.48 8 18c0 4.08 2.46 7.58 5.98 9.1-.08-.74-.16-1.88.03-2.69.17-.73 1.12-4.74 1.12-4.74s-.29-.57-.29-1.42c0-1.33.77-2.32 1.73-2.32.82 0 1.21.61 1.21 1.34 0 .82-.52 2.04-.79 3.17-.22.95.47 1.72 1.41 1.72 1.69 0 2.99-1.78 2.99-4.36 0-2.28-1.64-3.87-3.97-3.87-2.71 0-4.3 2.03-4.3 4.13 0 .82.31 1.69.71 2.17.08.09.09.17.07.27-.07.3-.24.95-.27 1.08-.04.18-.14.22-.33.13-1.24-.58-2.01-2.38-2.01-3.83 0-3.12 2.27-5.98 6.53-5.98 3.43 0 6.09 2.44 6.09 5.71 0 3.4-2.15 6.14-5.13 6.14-1 0-1.94-.52-2.27-1.14l-.61 2.35c-.22.86-.83 1.93-1.23 2.58.93.29 1.91.44 2.93.44 5.52 0 10-4.48 10-10S23.52 8 18 8z" fill="white"/>
+              </svg>
+            </div>
+            <div class="settings-connect-info">
+              <h3 style="margin:0 0 4px; font-size:15px; color:#1d2327;">Pinterest Account</h3>
+              <p style="margin:0; color:#50575e; font-size:13px;">Connected as <strong>@frugalfeast</strong></p>
+            </div>
+            <div class="settings-connect-status">
+              <span style="display:inline-flex; align-items:center; gap:4px; background:#edfaef; color:#00a32a; padding:4px 12px; border-radius:12px; font-size:12px; font-weight:600;">
+                <span style="width:8px;height:8px;background:#00a32a;border-radius:50%;display:inline-block;"></span>
+                Connected
+              </span>
+            </div>
+          </div>
+
+          <div class="settings-connect-details" style="margin-top:12px; padding:16px; background:#f9f9f9; border-radius:6px; border:1px solid #e0e0e0;">
+            <div style="display:flex; gap:24px; flex-wrap:wrap; font-size:13px; color:#50575e;">
+              <div><strong>Default Board:</strong> Frugal Feast Recipes</div>
+              <div><strong>Account type:</strong> Business</div>
+              <div><strong>Connected since:</strong> April 2026</div>
+            </div>
+            <div style="margin-top:12px;">
+              <button class="settings-btn" style="margin-right:8px;">Change Board</button>
+              <button class="settings-btn" style="color:#d63638; border-color:#d63638;">Disconnect</button>
+            </div>
+          </div>
+        </div>
+
+        <hr class="settings-divider">
+
+        <!-- Plan Section -->
+        <h2 class="settings-section-title">Your Plan</h2>
+
+        <div style="display:flex; gap:16px; margin-bottom:24px; flex-wrap:wrap;">
+          <!-- Current Plan Card -->
+          <div style="flex:1; min-width:260px; border:2px solid #2271b1; border-radius:8px; padding:20px; background:#f0f6fc;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <span style="font-size:18px; font-weight:700; color:#1d2327;">Starter</span>
+              <span style="background:#2271b1; color:#fff; padding:3px 10px; border-radius:10px; font-size:11px; font-weight:600;">CURRENT PLAN</span>
+            </div>
+            <div style="font-size:13px; color:#50575e; line-height:1.8;">
+              <div>&#10003; Up to <strong>50 pins/month</strong></div>
+              <div>&#10003; <strong>5</strong> pin templates</div>
+              <div>&#10003; Basic scheduling</div>
+              <div>&#10003; 1 Pinterest account</div>
+            </div>
+            <p style="margin:12px 0 0; font-size:12px; color:#757575;">Renews May 26, 2026 &middot; $9/mo</p>
+          </div>
+
+          <!-- Upgrade Card -->
+          <div style="flex:1; min-width:260px; border:1px solid #e0e0e0; border-radius:8px; padding:20px; background:#fff;">
+            <div style="margin-bottom:12px;">
+              <span style="font-size:18px; font-weight:700; color:#1d2327;">Pro</span>
+              <span style="margin-left:8px; font-size:13px; color:#50575e;">$19/mo</span>
+            </div>
+            <div style="font-size:13px; color:#50575e; line-height:1.8;">
+              <div>&#10003; <strong>Unlimited</strong> pins/month</div>
+              <div>&#10003; <strong>15+</strong> premium templates</div>
+              <div>&#10003; Smart scheduling &amp; analytics</div>
+              <div>&#10003; Up to 3 Pinterest accounts</div>
+              <div>&#10003; Priority support</div>
+            </div>
+            <button style="margin-top:16px; width:100%; padding:10px; background:#2271b1; color:#fff; border:none; border-radius:4px; font-size:13px; font-weight:600; cursor:pointer;">Upgrade to Pro</button>
+          </div>
+        </div>
+
+        <hr class="settings-divider">
+
+        <!-- Pin Preferences -->
+        <h2 class="settings-section-title">Pin Preferences</h2>
+        <p class="settings-desc">Customize how Pinmatic creates and schedules your pins.</p>
 
         <table class="settings-table">
           <tr>
-            <th><label>Gemini API Key</label></th>
-            <td><input type="text" value="AIza••••••••••••••••••" class="settings-input" readonly>
-            <p class="settings-help">Used for AI-powered pin copy generation.</p></td>
-          </tr>
-          <tr>
-            <th><label>Pinterest Access Token</label></th>
-            <td><input type="text" value="pina_••••••••••••••••" class="settings-input" readonly>
-            <p class="settings-help">Your Pinterest API v5 access token.</p></td>
-          </tr>
-          <tr>
-            <th><label>Pinterest API Mode</label></th>
-            <td>
-              <label class="settings-radio"><input type="radio" name="env" checked> <strong>Sandbox</strong> — Test without publishing real pins</label>
-              <label class="settings-radio"><input type="radio" name="env"> <strong>Production</strong> — Publish live pins to Pinterest</label>
-            </td>
-          </tr>
-          <tr>
-            <th><label>Default Pinterest Board</label></th>
-            <td>
-              <select class="settings-input"><option>Frugal Feast Recipes</option><option>Budget Meals</option><option>Quick Dinners</option></select>
-            </td>
-          </tr>
-        </table>
-
-        <h2 class="settings-section-title">Pin Image Generation</h2>
-        <p class="settings-desc">Customize how your generated pin images look.</p>
-
-        <table class="settings-table">
-          <tr>
-            <th><label>Pin Subtitle (Blog Name)</label></th>
+            <th><label>Blog Name on Pins</label></th>
             <td><input type="text" value="Frugal Feast Recipes" class="settings-input" maxlength="50">
-            <p class="settings-help">Shown at the bottom of generated pins. Max 50 characters.</p></td>
+            <p class="settings-help">Shown at the bottom of your generated pins. Max 50 characters.</p></td>
           </tr>
-          <tr>
-            <th><label>Pin Logo</label></th>
-            <td>
-              <div class="settings-logo-preview">
-                <div class="settings-logo-placeholder">Logo uploaded</div>
-              </div>
-              <button class="settings-btn">Change Logo</button>
-            </td>
-          </tr>
-        </table>
-
-        <h2 class="settings-section-title">Pin Scheduling</h2>
-        <p class="settings-desc">Control how pins are automatically scheduled.</p>
-
-        <table class="settings-table">
           <tr>
             <th><label>Max Pins Per Day</label></th>
             <td><input type="number" value="2" min="1" max="10" class="settings-input settings-input-sm">
@@ -1347,17 +1445,10 @@ button { cursor: pointer; font-family: inherit; }
               <label class="settings-checkbox"><input type="checkbox"> 12:00 PM</label>
               <label class="settings-checkbox"><input type="checkbox" checked> 5:00 PM</label>
               <label class="settings-checkbox"><input type="checkbox" checked> 8:00 PM</label>
-              <p class="settings-help">Peak Pinterest engagement times. We'll spread pins across these windows.</p>
+              <p class="settings-help">Peak Pinterest engagement times. Pins are spread across these windows.</p>
             </td>
           </tr>
         </table>
-
-        <hr class="settings-divider">
-
-        <h2 class="settings-section-title">Test API Connections</h2>
-        <p class="settings-desc">Save your settings first, then click below to verify all API keys are working.</p>
-        <button class="settings-btn" onclick="testConnections()">Test All Connections</button>
-        <div id="test-results"></div>
 
         <div style="margin-top: 24px;">
           <button class="settings-save-btn">Save Settings</button>
@@ -1978,7 +2069,12 @@ function submitFeedback() {
 /* ================================================================
    LAUNCH PINMATIC FROM POST CARD
    ================================================================ */
-function launchPinmatic() {
+
+    function uploadPin() {
+      alert('Upload your own custom pin image\n\nIn the full version, this opens a file picker where you can upload your own pre-designed pin image for this post. Pinmatic will schedule and publish it to Pinterest for you.');
+    }
+
+    function launchPinmatic() {
   openWizard();
 }
 </script>
