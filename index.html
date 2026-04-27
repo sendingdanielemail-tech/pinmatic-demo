@@ -435,21 +435,32 @@ button { cursor: pointer; font-family: inherit; }
   color: #fff; padding-top: 30px;
 }
 .pin-tpl-sunset_glow .pin-overlay-text h3 { font-family: 'Poppins', sans-serif; }
-/* Magazine Cover: dark overlay at top, serif title */
+/* Magazine Cover: thin semi-transparent top bar, refined serif title */
 .pin-tpl-magazine_cover { justify-content: flex-start; background-size: cover; background-position: center; }
 .pin-tpl-magazine_cover .pin-overlay-text {
-  background: linear-gradient(to bottom, rgba(10,10,20,0.85) 0%, rgba(10,10,20,0.5) 70%, transparent 100%);
-  color: #fff; padding: 16px 16px 30px;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+  color: #fff; padding: 10px 14px 20px;
 }
-.pin-tpl-magazine_cover .pin-overlay-text h3 { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; }
-/* Neon Pop: dark navy block, uppercase, pink accent line */
+.pin-tpl-magazine_cover .pin-overlay-text h3 {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 400;
+  font-size: 13px; letter-spacing: 0.5px;
+}
+.pin-tpl-magazine_cover .pin-overlay-text .pin-subtitle {
+  font-size: 8px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.7; margin-top: 2px;
+}
+/* Neon Pop: dark gradient, neon green accents, bold uppercase */
 .pin-tpl-neon_pop .pin-overlay-text {
-  background: #1a1a2e; color: #fff;
-  border-top: 3px solid #e84b7a;
+  background: linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(10,10,30,0.8) 70%, transparent 100%);
+  color: #fff; padding-top: 30px;
+  border-left: 4px solid #C8FF00;
 }
 .pin-tpl-neon_pop .pin-overlay-text h3 {
-  text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px;
-  font-family: 'Space Grotesk', sans-serif;
+  text-transform: uppercase; letter-spacing: 1.5px; font-size: 14px;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+  text-shadow: 0 0 20px rgba(200,255,0,0.15);
+}
+.pin-tpl-neon_pop .pin-overlay-text .pin-subtitle {
+  color: #C8FF00; font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
 }
 /* Torn Paper: cream strip across center, handwritten text */
 .pin-tpl-torn_paper { justify-content: center; background-size: cover; background-position: center; }
@@ -461,14 +472,27 @@ button { cursor: pointer; font-family: inherit; }
 }
 .pin-tpl-torn_paper .pin-overlay-text h3 { font-family: 'Caveat', cursive; font-weight: 700; font-style: normal; font-size: 22px; line-height: 1.1; }
 .pin-tpl-torn_paper .pin-overlay-text .pin-subtitle { color: #8B7355; }
-/* Split Diagonal: dark navy block, uppercase */
+/* Split Diagonal: diagonal gradient split, pink accent, right-aligned */
+.pin-tpl-split_diagonal { background-size: cover !important; background-position: center !important; }
 .pin-tpl-split_diagonal .pin-overlay-text {
-  background: #1a2744; color: #fff;
-  border-top: 3px solid #e84b7a;
+  background: linear-gradient(155deg, transparent 0%, transparent 30%, rgba(26,39,68,0.95) 30%, rgba(26,39,68,0.98) 100%) !important;
+  color: #fff;
+  padding: 0 14px 16px 55% !important;
+  text-align: left;
+  position: absolute !important; top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start;
+}
+.pin-tpl-split_diagonal .pin-overlay-text::before {
+  content: ''; display: block; width: 40px; height: 3px;
+  background: #E84B7A; margin-bottom: 10px;
 }
 .pin-tpl-split_diagonal .pin-overlay-text h3 {
   text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+}
+.pin-tpl-split_diagonal .pin-overlay-text .pin-subtitle {
+  font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 10px;
+  letter-spacing: 1px; opacity: 0.8; margin-top: 6px;
 }
 /* Soft Blush: pink overlay, white text */
 .pin-tpl-soft_blush .pin-overlay-text {
@@ -1747,7 +1771,7 @@ button { cursor: pointer; font-family: inherit; }
           </div>
           <div class="progress-step" id="gen-step-2">
             <span class="progress-icon pending"></span>
-            Writing pin copy with AI
+            Drafting pin copy
           </div>
           <div class="progress-step" id="gen-step-3">
             <span class="progress-icon pending"></span>
@@ -1760,7 +1784,7 @@ button { cursor: pointer; font-family: inherit; }
     <!-- ── STEP 2: Pin Copy Review ── -->
     <div id="wizard-step-2" class="wizard-step-content" style="display:none;">
       <h2 class="wizard-heading">Review your pins</h2>
-      <p class="wizard-subheading">Edit the AI-generated titles and descriptions. These appear on Pinterest when people see your pin.</p>
+      <p class="wizard-subheading">Edit the suggested titles and descriptions. These appear on Pinterest when people see your pin.</p>
 
       <div class="pin-review" id="pin-review-cards">
         <!-- Dynamically filled -->
@@ -1815,7 +1839,7 @@ button { cursor: pointer; font-family: inherit; }
         </div>
 
         <div class="feedback-question">
-          <label>Would you use the auto-generated templates, or prefer to upload your own Canva designs?</label>
+          <label>Would you use the built-in templates, or prefer to upload your own Canva designs?</label>
           <div class="feedback-options" data-q="templates_vs_upload">
             <span class="feedback-option" onclick="selectOption(this)">Templates</span>
             <span class="feedback-option" onclick="selectOption(this)">Upload my own</span>
