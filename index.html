@@ -347,17 +347,46 @@ button { cursor: pointer; font-family: inherit; }
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-/* Fake rendered pin image */
+/* Fake rendered pin image — zoomed to crop out baked-in sample text */
 .pin-preview-placeholder {
   width: 240px;
   height: 360px;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   overflow: hidden;
-  background-size: cover;
-  background-position: center;
+  background-size: 150%;
+  background-position: top center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  position: relative;
 }
-/* overlay text and gradient removed — template images have baked-in sample text */
+.pin-preview-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, transparent 65%);
+  z-index: 1;
+}
+.pin-preview-placeholder .pin-overlay-text {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+.pin-preview-placeholder .pin-overlay-text h3 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+.pin-preview-placeholder .pin-overlay-text .pin-subtitle {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  font-weight: 600;
+}
 .pin-fields { flex: 1; min-width: 0; }
 .pin-fields h3 { font-size: 15px; font-weight: 600; margin: 0 0 12px; }
 .pin-fields label { display: block; margin-bottom: 12px; }
@@ -1920,7 +1949,11 @@ function buildStep2() {
 
     var html = '<div class="pin-card">';
     html += '<div class="pin-preview">';
-    html += '<div class="pin-preview-placeholder" style="background-image:url(' + imgSrc + ');"></div></div>';
+    html += '<div class="pin-preview-placeholder" style="background-image:url(' + imgSrc + ');">';
+    html += '<div class="pin-overlay-text">';
+    html += '<h3>' + pin.title + '</h3>';
+    html += '<span class="pin-subtitle">The Cozy Kitchen</span>';
+    html += '</div></div></div>';
     html += '<div class="pin-fields">';
     html += '<h3>Pin ' + (i + 1) + ' &mdash; ' + pin.name + '</h3>';
     html += '<label><span>Title</span>';
@@ -1974,7 +2007,11 @@ function buildStep3() {
 
     var html = '<div class="pin-card">';
     html += '<div class="pin-preview">';
-    html += '<div class="pin-preview-placeholder" style="background-image:url(' + imgSrc + ');"></div></div>';
+    html += '<div class="pin-preview-placeholder" style="background-image:url(' + imgSrc + ');">';
+    html += '<div class="pin-overlay-text">';
+    html += '<h3>' + pin.title + '</h3>';
+    html += '<span class="pin-subtitle">The Cozy Kitchen</span>';
+    html += '</div></div></div>';
     html += '<div class="schedule-controls">';
     html += '<div class="schedule-picker"><input type="text" class="flatpickr-input" id="cal-' + i + '"></div>';
     html += '<div class="schedule-time">';
