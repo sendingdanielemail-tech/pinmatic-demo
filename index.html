@@ -31,78 +31,19 @@ button { cursor: pointer; font-family: inherit; }
 /* ================================================================
    SCREEN 0: LANDING / CONTEXT
    ================================================================ */
-.landing {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 24px;
-}
-.landing-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 40px;
-}
-.landing-logo { font-size: 22px; font-weight: 700; color: #1d2327; }
-.landing-badge {
-  font-size: 11px;
-  background: #e8f0fe;
-  color: #2271b1;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-.landing-hero {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  margin-bottom: 32px;
-}
-.landing-hero-img {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  /* Use a food photo placeholder via gradient */
-  background: linear-gradient(135deg, #e8d5b7 0%, #c4956a 50%, #8b6914 100%);
-}
-.landing-hero-body {
-  padding: 28px 32px;
-}
-.landing-hero-body h1 {
-  font-size: 26px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.landing-hero-body p {
-  color: #666;
-  font-size: 15px;
-  margin-bottom: 4px;
-}
-.landing-meta {
-  display: flex;
-  gap: 16px;
-  font-size: 13px;
-  color: #999;
-  margin-top: 12px;
-}
-.landing-prompt {
-  background: #fff;
-  border-radius: 12px;
-  padding: 32px;
-  text-align: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-}
-.landing-prompt h2 {
-  font-size: 20px;
-  margin-bottom: 8px;
-}
-.landing-prompt p {
-  color: #666;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -703,8 +644,8 @@ button { cursor: pointer; font-family: inherit; }
   .pin-preview, .pin-preview-placeholder { width: 100%; max-width: 240px; margin: 0 auto; }
   .tpl-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
   .schedule-time { flex-wrap: wrap; }
-  .landing { padding: 20px 16px; }
-  .landing-hero-body { padding: 20px; }
+  
+  
 }
 
 
@@ -795,12 +736,6 @@ button { cursor: pointer; font-family: inherit; }
   display: flex; align-items: center; gap: 12px;
   margin-bottom: 20px;
 }
-.page-title-action {
-  display: inline-block; padding: 4px 8px;
-  font-size: 13px; color: #2271b1; border: 1px solid #2271b1;
-  border-radius: 3px; text-decoration: none;
-  background: transparent;
-}
 .page-title-action:hover { background: #2271b1; color: #fff; }
 
 /* WP Posts Table */
@@ -821,10 +756,7 @@ button { cursor: pointer; font-family: inherit; }
   vertical-align: top;
 }
 .wp-list-table tr:hover td { background: #f6f7f7; }
-.wp-list-table .post-title {
-  font-weight: 600; color: #2271b1; font-size: 14px;
-}
-.wp-list-table .row-actions {
+.wp-list-table .wp-list-table .row-actions {
   color: #787c82; font-size: 12px; margin-top: 2px;
   visibility: hidden;
 }
@@ -837,21 +769,14 @@ button { cursor: pointer; font-family: inherit; }
   color: #d63638; font-weight: 600;
 }
 .wp-list-table .row-actions .create-pins:hover { color: #b32d2e; }
-.wp-list-table .post-status { 
-  color: #787c82; font-weight: 400; 
-}
-.wp-list-table .column-date { color: #50575e; }
-
-/* WP Notice */
+.wp-list-table .wp-list-table /* WP Notice */
 .wp-notice {
   background: #fff; border-left: 4px solid #00a32a;
   padding: 8px 12px; margin-bottom: 20px;
   box-shadow: 0 1px 1px rgba(0,0,0,0.04);
   font-size: 13px;
 }
-.wp-notice.notice-info { border-left-color: #72aee6; }
-
-/* Subheading with filter tabs */
+.wp-notice/* Subheading with filter tabs */
 .subsubsub {
   display: flex; gap: 8px; list-style: none; 
   margin-bottom: 12px; font-size: 13px; color: #50575e;
@@ -1645,7 +1570,7 @@ button { cursor: pointer; font-family: inherit; }
           </div>
         </div>
       </div>
-      </div>
+      
 
       <div class="wizard-nav">
         <button class="btn-back" onclick="closeWizard()">Cancel</button>
@@ -1685,8 +1610,9 @@ button { cursor: pointer; font-family: inherit; }
 
       <div class="pin-review" id="pin-review-cards">
         <!-- Dynamically filled -->
-      </div>
+      
 
+      </div>
       <div class="wizard-nav">
         <button class="btn-back" onclick="goToStep(1)">&#8592; Back</button>
         <div class="wizard-nav-right">
@@ -1699,8 +1625,9 @@ button { cursor: pointer; font-family: inherit; }
     <div id="wizard-step-3" class="wizard-step-content" style="display:none;">
       <div id="schedule-cards">
         <!-- Dynamically filled -->
-      </div>
+      
 
+      </div>
       <div class="wizard-nav">
         <button class="btn-back" onclick="goToStep(2)">&#8592; Back</button>
         <div class="wizard-nav-right">
@@ -1778,15 +1705,6 @@ button { cursor: pointer; font-family: inherit; }
 
   </div>
 </div>
-    </div>
-
-
-  </div>
-</div>
-
-<!-- ============================================================
-     SCRIPTS
-     ============================================================ -->
 
 <!-- ============================================================
      SCRIPTS
@@ -1984,6 +1902,7 @@ function buildStep2() {
 
   selectedTemplates.forEach(function(slug, i) {
     var pin = pinData[slug];
+    if (!pin) { console.warn('Unknown template:', slug); return; }
     var isDark = ['classic_dark', 'bold_banner', 'elegant_frame', 'magazine_cover', 'neon_pop', 'split_diagonal'].indexOf(slug) > -1;
     var textColor = isDark ? '#fff' : '#1d2327';
 
@@ -2009,14 +1928,14 @@ function buildStep2() {
 
   // Wire up character counters
   container.querySelectorAll('input[type="text"]').forEach(function(input) {
-    var counter = input.nextElementSibling;
+    var counter = input.parentElement.querySelector('.char-count');
     var max = input.getAttribute('maxlength');
     input.addEventListener('input', function() {
       counter.textContent = input.value.length + '/' + max;
     });
   });
   container.querySelectorAll('textarea').forEach(function(ta) {
-    var counter = ta.nextElementSibling;
+    var counter = ta.parentElement.querySelector('.char-count');
     var max = ta.getAttribute('maxlength');
     ta.addEventListener('input', function() {
       counter.textContent = ta.value.length + '/' + max;
@@ -2037,6 +1956,7 @@ function buildStep3() {
 
   selectedTemplates.forEach(function(slug, i) {
     var pin = pinData[slug];
+    if (!pin) { console.warn('Unknown template:', slug); return; }
     var isDark = ['classic_dark', 'bold_banner', 'elegant_frame', 'magazine_cover', 'neon_pop', 'split_diagonal'].indexOf(slug) > -1;
     var textColor = isDark ? '#fff' : '#1d2327';
 
