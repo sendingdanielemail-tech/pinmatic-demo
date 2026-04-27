@@ -2072,12 +2072,14 @@ function buildStep2() {
     container.innerHTML += html;
   });
 
-  // Wire up character counters
+  // Wire up character counters + live preview sync
   container.querySelectorAll('input[type="text"]').forEach(function(input) {
     var counter = input.parentElement.querySelector('.char-count');
     var max = input.getAttribute('maxlength');
+    var previewTitle = input.closest('.pin-card').querySelector('.pin-overlay-text h3');
     input.addEventListener('input', function() {
       counter.textContent = input.value.length + '/' + max;
+      if (previewTitle) previewTitle.textContent = input.value || 'Untitled Pin';
     });
   });
   container.querySelectorAll('textarea').forEach(function(ta) {
