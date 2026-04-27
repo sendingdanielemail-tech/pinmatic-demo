@@ -769,11 +769,11 @@ button { cursor: pointer; font-family: inherit; }
 #adminmenu li.pinmatic-menu > a {
   position: relative;
 }
-#adminmenu li.pinmatic-menu .dashicon {
-  color: #e8a87c;
+#adminmenu li.pinmatic-menu svg {
+  opacity: 0.7;
 }
-#adminmenu li.pinmatic-menu.current .dashicon {
-  color: #fff;
+#adminmenu li.pinmatic-menu.current svg {
+  opacity: 1;
 }
 
 /* WP Main Content Area */
@@ -877,9 +877,7 @@ button { cursor: pointer; font-family: inherit; }
   font-size: 28px; font-weight: 700; color: #1d2327;
   font-style: italic; margin-bottom: 4px;
 }
-.pm-header h1 .pm-pin-icon {
-  display: inline-block; margin-right: 4px; font-style: normal;
-}
+/* pin icon is now inline SVG */
 .pm-header .pm-tagline {
   font-size: 14px; color: #787c82; font-weight: 400;
 }
@@ -1123,7 +1121,7 @@ button { cursor: pointer; font-family: inherit; }
   <div class="wp-logo">
     <svg width="20" height="20" viewBox="0 0 122.52 122.52" fill="#c3c4c7"><path d="M8.708 61.26c0 20.802 12.089 38.779 29.619 47.298L13.258 39.872a52.354 52.354 0 00-4.55 21.388zm88.032-2.652c0-6.495-2.333-10.993-4.334-14.494-2.664-4.329-5.161-7.995-5.161-12.324 0-4.831 3.664-9.328 8.825-9.328.233 0 .454.029.681.042-9.35-8.566-21.807-13.796-35.489-13.796-18.36 0-34.513 9.42-43.91 23.688 1.233.037 2.395.063 3.382.063 5.497 0 14.006-.668 14.006-.668 2.833-.167 3.167 3.994.337 4.329 0 0-2.847.335-6.015.501L48.2 93.547l11.501-34.493-8.188-22.434c-2.83-.166-5.511-.501-5.511-.501-2.832-.166-2.5-4.496.332-4.329 0 0 8.679.668 13.843.668 5.496 0 14.006-.668 14.006-.668 2.834-.167 3.168 3.994.337 4.329 0 0-2.853.335-6.015.501l18.992 56.494 5.242-17.517c2.272-7.269 4.001-12.49 4.001-16.989z"/><path d="M62.184 65.857l-15.768 45.819a52.516 52.516 0 0032.644-.849 4.7 4.7 0 01-.377-.726L62.184 65.857zm45.125-29.836a48.66 48.66 0 01.382 6.851c0 6.764-1.264 14.369-5.093 23.869l-20.467 59.175C98.04 97.377 108.67 80.593 108.67 61.26c0-9.073-2.447-17.583-6.706-24.898l5.345-.341z"/><path d="M61.26 0C27.434 0 0 27.434 0 61.26s27.434 61.26 61.26 61.26 61.26-27.434 61.26-61.26S95.086 0 61.26 0zm0 119.715c-32.242 0-58.455-26.213-58.455-58.455S29.018 2.805 61.26 2.805s58.455 26.213 58.455 58.455-26.213 58.455-58.455 58.455z"/></svg>
   </div>
-  <a class="ab-item" href="#">The Frugal Feast!</a>
+  <a class="ab-item" href="#">The Cozy Kitchen</a>
   <span class="ab-item" style="color:#00ba37;font-size:11px;font-weight:600;background:#e6ffe6;padding:0 6px;border-radius:3px;margin-left:4px;">Live</span>
   <div class="ab-right">
     <a class="ab-item" href="#">Howdy, Danny</a>
@@ -1143,7 +1141,10 @@ button { cursor: pointer; font-family: inherit; }
     <li><a href="#"><span class="dashicon">&#x1F4C4;</span> Pages</a></li>
     <li><a href="#"><span class="dashicon">&#x1F4AC;</span> Comments</a></li>
     <li class="wp-menu-separator"></li>
-    <li id="menu-pinmatic" class="pinmatic-menu current"><a href="#"><span class="dashicon">&#x1F4CD;</span> Pinmatic</a></li>
+    <li id="menu-pinmatic" class="pinmatic-menu current"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20" height="20" style="vertical-align:middle;">
+  <rect width="48" height="48" rx="10" ry="10" fill="#E84B7A"/>
+  <path fill="white" d="M 15,12 L 15,36 L 20,36 L 20,28 L 26,28 C 30,28 33,26 34.5,23.5 C 35.5,21.8 36,19.8 36,18 C 36,15.5 35,13.5 33,12.2 C 31.2,11 29,10.5 26.5,10.5 L 15,10.5 Z M 20,16 L 26,16 C 28,16 29.5,16.5 30.3,17.3 C 31,18 31.3,19 31.3,20 C 31.3,21.2 30.8,22.2 30,23 C 29,23.8 27.8,24 26,24 L 20,24 Z" fill-rule="evenodd"/>
+</svg> Pinmatic</a></li>
     <li class="wp-menu-separator"></li>
     <li><a href="#"><span class="dashicon">&#x1F3A8;</span> Appearance</a></li>
     <li><a href="#"><span class="dashicon">&#x1F50C;</span> Plugins</a></li>
@@ -1159,7 +1160,10 @@ button { cursor: pointer; font-family: inherit; }
 
     <!-- ── PINMATIC DASHBOARD ── -->
     <div class="pm-header">
-      <h1><span class="pm-pin-icon">&#x1F4CD;</span> <em>PinMatic</em></h1>
+      <h1><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28" height="28" style="vertical-align:middle;margin-right:6px;">
+  <rect width="48" height="48" rx="10" ry="10" fill="#E84B7A"/>
+  <path fill="white" d="M 15,12 L 15,36 L 20,36 L 20,28 L 26,28 C 30,28 33,26 34.5,23.5 C 35.5,21.8 36,19.8 36,18 C 36,15.5 35,13.5 33,12.2 C 31.2,11 29,10.5 26.5,10.5 L 15,10.5 Z M 20,16 L 26,16 C 28,16 29.5,16.5 30.3,17.3 C 31,18 31.3,19 31.3,20 C 31.3,21.2 30.8,22.2 30,23 C 29,23.8 27.8,24 26,24 L 20,24 Z" fill-rule="evenodd"/>
+</svg> <em>PinMatic</em></h1>
       <span class="pm-tagline">Automatically create, schedule and manage your pins</span>
     </div>
 
@@ -1355,7 +1359,7 @@ button { cursor: pointer; font-family: inherit; }
             </div>
             <div class="settings-connect-info">
               <h3 style="margin:0 0 4px; font-size:15px; color:#1d2327;">Pinterest Account</h3>
-              <p style="margin:0; color:#50575e; font-size:13px;">Connected as <strong>@frugalfeast</strong></p>
+              <p style="margin:0; color:#50575e; font-size:13px;">Connected as <strong>@thecozykitchen</strong></p>
             </div>
             <div class="settings-connect-status">
               <span style="display:inline-flex; align-items:center; gap:4px; background:#edfaef; color:#00a32a; padding:4px 12px; border-radius:12px; font-size:12px; font-weight:600;">
@@ -1367,7 +1371,7 @@ button { cursor: pointer; font-family: inherit; }
 
           <div class="settings-connect-details" style="margin-top:12px; padding:16px; background:#f9f9f9; border-radius:6px; border:1px solid #e0e0e0;">
             <div style="display:flex; gap:24px; flex-wrap:wrap; font-size:13px; color:#50575e;">
-              <div><strong>Default Board:</strong> Frugal Feast Recipes</div>
+              <div><strong>Default Board:</strong> The Cozy Kitchen</div>
               <div><strong>Account type:</strong> Business</div>
               <div><strong>Connected since:</strong> April 2026</div>
             </div>
@@ -1425,7 +1429,7 @@ button { cursor: pointer; font-family: inherit; }
         <table class="settings-table">
           <tr>
             <th><label>Blog Name on Pins</label></th>
-            <td><input type="text" value="Frugal Feast Recipes" class="settings-input" maxlength="50">
+            <td><input type="text" value="The Cozy Kitchen" class="settings-input" maxlength="50">
             <p class="settings-help">Shown at the bottom of your generated pins. Max 50 characters.</p></td>
           </tr>
           <tr>
@@ -1871,7 +1875,7 @@ function buildStep2() {
     html += '<div class="pin-preview-placeholder" style="background:' + pin.bg + ';">';
     html += '<div class="pin-overlay-text" style="color:' + textColor + ';">';
     html += '<h3>' + pin.title + '</h3>';
-    html += '<span class="pin-subtitle">Frugal Feast Recipes</span>';
+    html += '<span class="pin-subtitle">The Cozy Kitchen</span>';
     html += '</div></div></div>';
     html += '<div class="pin-fields">';
     html += '<h3>Pin ' + (i + 1) + ' &mdash; ' + pin.name + '</h3>';
@@ -1927,7 +1931,7 @@ function buildStep3() {
     html += '<div class="pin-preview-placeholder" style="background:' + pin.bg + ';">';
     html += '<div class="pin-overlay-text" style="color:' + textColor + ';">';
     html += '<h3>' + pin.title + '</h3>';
-    html += '<span class="pin-subtitle">Frugal Feast Recipes</span>';
+    html += '<span class="pin-subtitle">The Cozy Kitchen</span>';
     html += '</div></div></div>';
     html += '<div class="schedule-controls">';
     html += '<div class="schedule-picker"><input type="text" class="flatpickr-input" id="cal-' + i + '"></div>';
@@ -2099,7 +2103,7 @@ function testConnections() {
   results.innerHTML = '<table style="margin-top:12px;border-collapse:collapse;width:100%;max-width:400px;font-size:13px;">' +
     '<tr><td style="padding:6px;border-bottom:1px solid #dcdcde;">Gemini API</td><td style="padding:6px;border-bottom:1px solid #dcdcde;color:#00a32a;font-weight:600;">Connected</td></tr>' +
     '<tr><td style="padding:6px;border-bottom:1px solid #dcdcde;">Pinterest API</td><td style="padding:6px;border-bottom:1px solid #dcdcde;color:#00a32a;font-weight:600;">Connected</td></tr>' +
-    '<tr><td style="padding:6px;">Pinterest Board</td><td style="padding:6px;color:#00a32a;font-weight:600;">Found (Frugal Feast Recipes)</td></tr>' +
+    '<tr><td style="padding:6px;">Pinterest Board</td><td style="padding:6px;color:#00a32a;font-weight:600;">Found (The Cozy Kitchen)</td></tr>' +
     '</table>';
 }
 </script>
