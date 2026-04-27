@@ -353,41 +353,11 @@ button { cursor: pointer; font-family: inherit; }
   height: 360px;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 20px;
-  position: relative;
   overflow: hidden;
   background-size: cover;
   background-position: center;
 }
-.pin-preview-placeholder .pin-overlay-text {
-  position: relative;
-  z-index: 2;
-  color: #fff;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-}
-.pin-preview-placeholder .pin-overlay-text h3 {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 8px;
-}
-.pin-preview-placeholder .pin-overlay-text .pin-subtitle {
-  font-size: 13px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  opacity: 0.9;
-  font-weight: 600;
-}
-.pin-preview-placeholder::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
-  z-index: 1;
-}
+/* overlay text and gradient removed — template images have baked-in sample text */
 .pin-fields { flex: 1; min-width: 0; }
 .pin-fields h3 { font-size: 15px; font-weight: 600; margin: 0 0 12px; }
 .pin-fields label { display: block; margin-bottom: 12px; }
@@ -435,6 +405,47 @@ button { cursor: pointer; font-family: inherit; }
   box-shadow: none !important;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
+}
+/* Flatpickr overrides: center month + make overflow dates selectable */
+.flatpickr-calendar .flatpickr-months {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flatpickr-calendar .flatpickr-current-month {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  left: 0;
+  position: relative;
+  padding: 0;
+}
+.flatpickr-calendar .flatpickr-month {
+  flex: 1;
+  text-align: center;
+}
+.flatpickr-calendar .flatpickr-prev-month,
+.flatpickr-calendar .flatpickr-next-month {
+  position: relative;
+  top: auto;
+}
+/* Make next-month overflow dates look fully selectable */
+.flatpickr-calendar .flatpickr-day.nextMonthDay,
+.flatpickr-calendar .flatpickr-day.prevMonthDay {
+  color: #1d2327 !important;
+  opacity: 1 !important;
+}
+.flatpickr-calendar .flatpickr-day.nextMonthDay:hover,
+.flatpickr-calendar .flatpickr-day.prevMonthDay:hover {
+  background: #e6e6e6;
+  border-color: #e6e6e6;
+}
+.flatpickr-calendar .flatpickr-day.nextMonthDay.selected,
+.flatpickr-calendar .flatpickr-day.prevMonthDay.selected {
+  background: #d63638 !important;
+  border-color: #d63638 !important;
+  color: #fff !important;
 }
 .schedule-time {
   display: flex;
@@ -1903,16 +1914,13 @@ function buildStep2() {
   selectedTemplates.forEach(function(slug, i) {
     var pin = pinData[slug];
     if (!pin) { console.warn('Unknown template:', slug); return; }
-    var isDark = ['classic_dark', 'bold_banner', 'elegant_frame', 'magazine_cover', 'neon_pop', 'split_diagonal'].indexOf(slug) > -1;
-    var textColor = isDark ? '#fff' : '#1d2327';
+
+    var tplImg = document.querySelector('[data-tpl="' + slug + '"] .tpl-card-thumb img');
+    var imgSrc = tplImg ? tplImg.src : '';
 
     var html = '<div class="pin-card">';
     html += '<div class="pin-preview">';
-    html += '<div class="pin-preview-placeholder" style="background:' + pin.bg + ';">';
-    html += '<div class="pin-overlay-text" style="color:' + textColor + ';">';
-    html += '<h3>' + pin.title + '</h3>';
-    html += '<span class="pin-subtitle">The Cozy Kitchen</span>';
-    html += '</div></div></div>';
+    html += '<div class="pin-preview-placeholder" style="background-image:url(' + imgSrc + ');"></div></div>';
     html += '<div class="pin-fields">';
     html += '<h3>Pin ' + (i + 1) + ' &mdash; ' + pin.name + '</h3>';
     html += '<label><span>Title</span>';
@@ -1957,19 +1965,16 @@ function buildStep3() {
   selectedTemplates.forEach(function(slug, i) {
     var pin = pinData[slug];
     if (!pin) { console.warn('Unknown template:', slug); return; }
-    var isDark = ['classic_dark', 'bold_banner', 'elegant_frame', 'magazine_cover', 'neon_pop', 'split_diagonal'].indexOf(slug) > -1;
-    var textColor = isDark ? '#fff' : '#1d2327';
+
+    var tplImg = document.querySelector('[data-tpl="' + slug + '"] .tpl-card-thumb img');
+    var imgSrc = tplImg ? tplImg.src : '';
 
     var schedDate = new Date(baseDate);
     schedDate.setDate(schedDate.getDate() + (i * 3)); // Space pins 3 days apart
 
     var html = '<div class="pin-card">';
     html += '<div class="pin-preview">';
-    html += '<div class="pin-preview-placeholder" style="background:' + pin.bg + ';">';
-    html += '<div class="pin-overlay-text" style="color:' + textColor + ';">';
-    html += '<h3>' + pin.title + '</h3>';
-    html += '<span class="pin-subtitle">The Cozy Kitchen</span>';
-    html += '</div></div></div>';
+    html += '<div class="pin-preview-placeholder" style="background-image:url(' + imgSrc + ');"></div></div>';
     html += '<div class="schedule-controls">';
     html += '<div class="schedule-picker"><input type="text" class="flatpickr-input" id="cal-' + i + '"></div>';
     html += '<div class="schedule-time">';
